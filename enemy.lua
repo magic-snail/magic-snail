@@ -1,7 +1,7 @@
 Enemy = {}
 Enemy.__index = Enemy
 
-function Enemy:new(x, y, image)
+function Enemy.new(x, y, image)
     local en = {}
     setmetatable(en, Enemy)
     en.x = x
