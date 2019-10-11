@@ -1,15 +1,14 @@
 require 'snail'
 
 function love.load()
+    points = 0
+    startTime = love.timer.getTime()
     speed = 1000
     mySnail = Snail:new(0, 0, "/assets/images/snail.png")
     myBackground = love.graphics.newImage("/assets/images/green.png")
 
     love.window.setFullscreen(true)
     love.window.setTitle('Magic Snail')
-
-    love.graphics.setNewFont(12)
-    love.graphics.setBackgroundColor(255,255,255)
 end
 
 function love.update(dt)
@@ -36,7 +35,13 @@ function love.draw()
     end
 
     -- print FPS
-    love.graphics.print("FPS: " .. love.timer.getFPS(), 0, 0)
+    love.graphics.setNewFont(15)
+    love.graphics.print("FPS: " .. love.timer.getFPS(), 0, 50)
+
+    -- print Infos
+    love.graphics.setNewFont(25)
+    love.graphics.print("Points: " .. points, 0, 0)
+    love.graphics.print("Time: " .. math.floor(love.timer.getTime() - startTime), love.graphics.getWidth()-150, 0)
 
     mySnail:draw()
 end
