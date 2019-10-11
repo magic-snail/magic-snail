@@ -6,6 +6,8 @@ function love.load()
     myBackground = love.graphics.newImage("/assets/images/green.png")
 
     love.window.setFullscreen(true)
+    love.window.setTitle('Magic Snail')
+
     love.graphics.setNewFont(12)
     love.graphics.setBackgroundColor(255,255,255)
 end
