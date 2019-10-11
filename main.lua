@@ -1,22 +1,32 @@
 require 'snail'
 
+local points
+local startTime
+local speed
+local myBackground
+local myBackgroundGrass
+local backgroundGrassArray
+local myBackgroundMush
+local backgroundMushArray
+local mySnail
+
 function love.load()
     -- Globals
     points = 0
     startTime = love.timer.getTime()
     speed = 1000
-    numGrass = 10
-    numMushroom = 10
+    local numGrass = 10
+    local numMushroom = 10
 
     -- Backgroundsound
-    myBackgroundSound = love.audio.newSource("/assets/music/sneaky_snitch.mp3", "stream")
+    local myBackgroundSound = love.audio.newSource("/assets/music/sneaky_snitch.mp3", "stream")
     myBackgroundSound:setLooping(true)
     myBackgroundSound:play()
 
     -- Window
     love.window.setFullscreen(true)
     love.window.setTitle('Magic Snail')
-    snailIcon = love.image.newImageData('/assets/images/snail_left.png')
+    local snailIcon = love.image.newImageData('/assets/images/snail_left.png')
     love.window.setIcon(snailIcon)
 
     -- Backgroundimage
@@ -40,7 +50,14 @@ function love.load()
     end
 
     -- Classes
-    mySnail = Snail:new(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2, "/assets/images/snail_left.png", "/assets/images/snail_right.png", "/assets/images/snail_back.png", "/assets/images/snail_front.png")
+    mySnail = Snail.new(
+        love.graphics.getWidth() / 2,
+        love.graphics.getHeight() / 2,
+        "/assets/images/snail_left.png",
+        "/assets/images/snail_right.png",
+        "/assets/images/snail_back.png",
+        "/assets/images/snail_front.png"
+    )
 end
 
 function love.update(dt)
@@ -68,12 +85,12 @@ function love.draw()
     end
 
     -- Draw Grass
-    for i, position in pairs(backgroundGrassArray) do
+    for _, position in pairs(backgroundGrassArray) do
         love.graphics.draw(myBackgroundGrass, position["x"], position["y"])
     end
 
     -- Draw Mushrooms
-    for i, position in pairs(backgroundMushArray) do
+    for _, position in pairs(backgroundMushArray) do
         love.graphics.draw(myBackgroundMush, position["x"], position["y"])
     end
 
@@ -84,7 +101,11 @@ function love.draw()
     -- print Infos
     love.graphics.setNewFont(25)
     love.graphics.print("Points: " .. points, 0, 0)
-    love.graphics.print("Time: " .. string.format("%04d", math.floor(love.timer.getTime() - startTime)), love.graphics.getWidth()-150, 0)
+    love.graphics.print(
+        "Time: " .. string.format("%04d", math.floor(love.timer.getTime() - startTime)),
+        love.graphics.getWidth()-150,
+        0
+    )
 
     -- Draw Classes
     mySnail:draw()
