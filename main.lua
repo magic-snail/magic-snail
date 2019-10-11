@@ -6,9 +6,6 @@ function love.load()
     startTime = love.timer.getTime()
     speed = 1000
 
-    -- Classes
-    mySnail = Snail:new(0, 0, "/assets/images/snail_left.png")
-
     -- Backgroundimage
     myBackground = love.graphics.newImage("/assets/images/green.png")
 
@@ -22,6 +19,9 @@ function love.load()
     love.window.setTitle('Magic Snail')
     snailIcon = love.image.newImageData('/assets/images/snail_left.png')
     love.window.setIcon(snailIcon)
+
+    -- Classes
+    mySnail = Snail:new(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2, "/assets/images/snail_left.png")
 end
 
 function love.update(dt)
