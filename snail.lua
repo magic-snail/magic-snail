@@ -8,10 +8,15 @@ function Snail:new(x, y, image)
     sn.y = y
     sn.image = love.graphics.newImage(image)
     sn.snailWidth, sn.snailHeight = sn.image:getDimensions()
+
+    -- 0 = right, 1 = down, 2 = left, 3 = up
+    sn.facingDirection = 0
     return sn
 end
 
 function Snail:moveX(p)
+    if p < 0 then self.facingDirection = 2 else self.facingDirection = 0 end
+
     self.x = self.x + p
 
     -- Stop at borders
@@ -36,5 +41,9 @@ function Snail:moveY(p)
 end
 
 function Snail:draw()
-    love.graphics.draw(self.image, self.x, self.y)
+    -- 0 = right, 1 = down, 2 = left, 3 = up
+    if self.facingDirection == 0 then love.graphics.draw(self.image, self.x, self.y, 0, -1, 1) end
+    -- if self.facingDirection == 1 then love.graphics.draw(self.image, self.x, self.y, 0, -1, 1) end
+    if self.facingDirection == 2 then love.graphics.draw(self.image, self.x, self.y, 0, 1, 1) end
+    -- if self.facingDirection == 3 then love.graphics.draw(self.image, self.x, self.y, 0, -1, 1) end
 end

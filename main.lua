@@ -7,7 +7,7 @@ function love.load()
     speed = 1000
 
     -- Classes
-    mySnail = Snail:new(0, 0, "/assets/images/snail.png")
+    mySnail = Snail:new(0, 0, "/assets/images/snail_left.png")
 
     -- Backgroundimage
     myBackground = love.graphics.newImage("/assets/images/green.png")
