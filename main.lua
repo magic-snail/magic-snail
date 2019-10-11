@@ -11,16 +11,16 @@ end
 function love.update(dt)
     -- react to key presses
     if love.keyboard.isDown("down") then
-        mySnail:moveY(100 * dt)
+        mySnail:moveY(1000 * dt)
     end
     if love.keyboard.isDown("up") then
-        mySnail:moveY(- 100 * dt)
+        mySnail:moveY(- 1000 * dt)
     end
     if love.keyboard.isDown("left") then
-        mySnail:moveX(- 100 * dt)
+        mySnail:moveX(- 1000 * dt)
     end
     if love.keyboard.isDown("right") then
-        mySnail:moveX(100 * dt)
+        mySnail:moveX(1000 * dt)
     end
 end
 
