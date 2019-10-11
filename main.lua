@@ -1,4 +1,5 @@
 require 'snail'
+require 'enemy'
 
 local points
 local startTime
@@ -9,6 +10,7 @@ local backgroundGrassArray
 local myBackgroundMush
 local backgroundMushArray
 local mySnail
+local testEnemy
 
 function love.load()
     -- Globals
@@ -58,6 +60,8 @@ function love.load()
         "/assets/images/snail_back.png",
         "/assets/images/snail_front.png"
     )
+
+    testEnemy = Enemy.new(1000, 1000, "/assets/images/snail_left.png")
 end
 
 function love.update(dt)
@@ -74,6 +78,7 @@ function love.update(dt)
     if love.keyboard.isDown("right") then
         mySnail:moveX(speed * dt)
     end
+    testEnemy:move(speed * dt, mySnail:getX(), mySnail:getY())
 end
 
 function love.draw()
@@ -109,4 +114,5 @@ function love.draw()
 
     -- Draw Classes
     mySnail:draw()
+    testEnemy:draw()
 end
