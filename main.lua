@@ -41,7 +41,7 @@ function love.draw()
     -- print Infos
     love.graphics.setNewFont(25)
     love.graphics.print("Points: " .. points, 0, 0)
-    love.graphics.print("Time: " .. math.floor(love.timer.getTime() - startTime), love.graphics.getWidth()-150, 0)
+    love.graphics.print("Time: " .. string.format("%03d", math.floor(love.timer.getTime() - startTime)), love.graphics.getWidth()-150, 0)
 
     mySnail:draw()
 end
