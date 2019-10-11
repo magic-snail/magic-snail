@@ -1,7 +1,7 @@
 Element = {}
 Element .__index = Element
 
-function Element.new(x, y, directionX, directionY,image)
+function Element.new(x, y, directionX, directionY, speed, image)
     local em = {}
     setmetatable(em, Element)
     em.x = x
