@@ -14,12 +14,17 @@ function Snail.new(x, y, imageLeft, imageRight, imageUp, imageDown)
 
     -- 0 = right, 1 = down, 2 = left, 3 = up
     sn.facingDirection = 0
+
     return sn
 end
 
 function Snail:moveX(p)
     -- 0 = right, 1 = down, 2 = left, 3 = up
-    if p < 0 then self.facingDirection = 2 else self.facingDirection = 0 end
+    if p < 0 then
+        self.facingDirection = 2
+    else
+        self.facingDirection = 0
+    end
 
     self.x = self.x + p
 
@@ -34,7 +39,11 @@ end
 
 function Snail:moveY(p)
     -- 0 = right, 1 = down, 2 = left, 3 = up
-    if p < 0 then self.facingDirection = 3 else self.facingDirection = 1 end
+    if p < 0 then
+        self.facingDirection = 3
+    else
+        self.facingDirection = 1
+    end
 
     self.y = self.y + p
 
@@ -49,8 +58,16 @@ end
 
 function Snail:draw()
     -- 0 = right, 1 = down, 2 = left, 3 = up
-    if self.facingDirection == 0 then love.graphics.draw(self.imageRight, self.x, self.y) end
-    if self.facingDirection == 1 then love.graphics.draw(self.imageDown, self.x, self.y) end
-    if self.facingDirection == 2 then love.graphics.draw(self.imageLeft, self.x, self.y) end
-    if self.facingDirection == 3 then love.graphics.draw(self.imageUp, self.x, self.y) end
+    if self.facingDirection == 0 then
+        love.graphics.draw(self.imageRight, self.x, self.y)
+    end
+    if self.facingDirection == 1 then
+        love.graphics.draw(self.imageDown, self.x, self.y)
+    end
+    if self.facingDirection == 2 then
+        love.graphics.draw(self.imageLeft, self.x, self.y)
+    end
+    if self.facingDirection == 3 then
+        love.graphics.draw(self.imageUp, self.x, self.y)
+    end
 end

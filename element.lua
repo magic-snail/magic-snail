@@ -10,6 +10,7 @@ function Element.new(x, y, directionX, directionY, speed, image)
     em.dy = directionY
     em.speed = speed
     em.image = love.graphics.newImage(image)
+
     return em
 end
 
