@@ -11,6 +11,14 @@ function Snail:new(x, y, image)
     return sn
 end
 
+function Snail:getX()
+    return self.x
+end
+
+function Snail:getY()
+    return self.y
+end
+
 function Snail:moveX(p)
     self.x = self.x + p
 
