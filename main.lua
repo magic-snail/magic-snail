@@ -9,6 +9,8 @@ function love.load()
 
     love.window.setFullscreen(true)
     love.window.setTitle('Magic Snail')
+    snailIcon = love.image.newImageData('/assets/images/snail_left.png')
+    love.window.setIcon(snailIcon)
 end
 
 function love.update(dt)
