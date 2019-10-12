@@ -17,8 +17,8 @@ function Element.new(x, y, directionX, directionY, image)
 end
 
 function Element:fire(p)
-    self.x = self.x - em.ax * p
-    self.y = self.y - em.ay * p
+    self.x = self.x - self.ax * p
+    self.y = self.y - self.ay * p
 end
 
 function Element:draw()
