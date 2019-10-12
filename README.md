@@ -12,12 +12,14 @@ It is licensed under GNU Affero General Public License version 3 or later.
 Playing the Game
 ================
 
+You can either use the instructions for your operating system below, or install [löve](https://love2d.org) and then download and open [magic-snail.love](https://github.com/magic-snail/magic-snail/releases/latest/download/magic-snail.love).
+
 Linux
 -----
 
-1. Download (and install) [löve](https://love2d.org)
-2. Download [magic-snail.love](https://github.com/magic-snail/magic-snail/releases/latest/download/magic-snail.love)
-3. Execute `love magic-snail.love`
+1. Download [magic-snail-linux.AppImage](https://github.com/magic-snail/magic-snail/releases/latest/download/magic-snail-linux.AppImage)
+1. Make it executable: `chmod u+x magic-snail-linux.AppImage`
+3. Execute `./magic-snail-linux.AppImage`
 
 Windows
 -------
