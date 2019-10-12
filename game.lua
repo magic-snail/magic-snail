@@ -388,7 +388,7 @@ end
 function areColliding(enemy, obstaclesArray)
     eWidth, eHeight = enemy.image:getDimensions()
 
-    for colnum, obstacle in pairs(obstaclesArray) do
+    for colNum, obstacle in pairs(obstaclesArray) do
         oWidth, oHeight = obstacle.image:getDimensions()
 
         if enemy.x < (obstacle.x + oWidth)
@@ -396,7 +396,7 @@ function areColliding(enemy, obstaclesArray)
             and enemy.y < (obstacle.y + oHeight)
             and obstacle.y < (enemy.y + eHeight)
         then
-            return true, colnum
+            return true, colNum
         end
     end
 
