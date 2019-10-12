@@ -129,7 +129,27 @@ function love.update(dt)
     end
 
     if math.random(100 / dt) < (chanceOfNewEnemy + 1) then
-        table.insert(enemyArray, Enemy.new(1000, 1000, "/assets/images/golem.png"))
+        local x, y
+        -- 1 = right, 2 = down, 3 = left, 4 = up
+        startdir = math.max(1, math.floor(math.random(4)))
+        if startdir == 1 then
+            x = love.graphics.getWidth()
+            y = math.random(love.graphics.getHeight())
+        end
+        if startdir == 2 then
+            x = math.random(love.graphics.getWidth())
+            y = love.graphics.getHeight()
+        end
+        if startdir == 3 then
+            x = 0
+            y = math.random(love.graphics.getHeight())
+        end
+        if startdir == 4 then
+            x = math.random(love.graphics.getWidth())
+            y = 0
+        end
+
+        table.insert(enemyArray, Enemy.new(x, y, "/assets/images/golem.png"))
     end
 
     for _, enemy in pairs(enemyArray) do
