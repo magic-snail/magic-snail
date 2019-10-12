@@ -11,7 +11,9 @@ local enemySpeed
 local myBackground
 local backgroundElementsArray
 local mySnail
-local testEnemy
+local chanceOfNewEnemy = 100
+local enemyArray = {}
+local obstacles
 
 function game.load()
     -- Globals
@@ -27,6 +29,7 @@ function game.load()
 
     local numGrass = 10
     local numMushroom = 10
+    local numObstacles = 3
 
     -- Backgroundsound
     local myBackgroundSound = love.audio.newSource("/assets/music/sneaky_snitch.mp3", "stream")
@@ -45,14 +48,14 @@ function game.load()
     local myBackgroundGrass = love.graphics.newImage("/assets/images/green_grass_free.png")
     local myBackgroundMush= love.graphics.newImage("/assets/images/green_mushroom_free.png")
     backgroundElementsArray = {}
-    for _ = 1, numGrass + 1 do
+    for _ = 1, numGrass do
         table.insert(backgroundElementsArray, {
             image = myBackgroundGrass,
             x = love.math.random(love.graphics.getWidth()),
             y = love.math.random(love.graphics.getHeight())
         })
     end
-    for _ = 1, numMushroom + 1 do
+    for _ = 1, numMushroom do
         table.insert(backgroundElementsArray, {
             image = myBackgroundMush,
             x = love.math.random(love.graphics.getWidth()),
@@ -65,6 +68,26 @@ function game.load()
         function(a, b) return a['y'] < b['y'] end
     )
 
+    -- add some obstacles
+    obstacles = {}
+    -- placement: space around: a bit more than the size of the snail/enemies
+    -- width 150
+    -- height 110
+    local obstacleImage = love.graphics.newImage("/assets/images/wood_free.png")
+    for _ = 1, numObstacles do
+        table.insert(obstacles, {
+            image = obstacleImage,
+            x = math.min(
+                love.graphics.getWidth() - 300 - obstacleImage:getWidth(),
+                math.max(300, love.math.random(love.graphics.getWidth()))
+            ),
+            y = math.min(
+                love.graphics.getHeight() - 300 - obstacleImage:getHeight(),
+                math.max(300, love.math.random(love.graphics.getHeight()))
+            )
+        })
+    end
+
     -- Classes
     mySnail = Snail.new(
         love.graphics.getWidth() / 2,
@@ -74,8 +97,6 @@ function game.load()
         "/assets/images/snail_back.png",
         "/assets/images/snail_front.png"
     )
-
-    testEnemy = Enemy.new(1000, 1000, "/assets/images/golem.png")
 end
 
 function game.update(dt)
@@ -112,7 +133,50 @@ function game.update(dt)
         end
     end
 
-    testEnemy:move(enemySpeed * dt, mySnail:getX(), mySnail:getY())
+    if math.random(100 / dt) < (chanceOfNewEnemy + 1) then
+        local x, y
+        -- 1 = right, 2 = down, 3 = left, 4 = up
+        startdir = math.max(1, math.floor(math.random(4)))
+        if startdir == 1 then
+            x = love.graphics.getWidth()
+            y = math.random(love.graphics.getHeight())
+        end
+        if startdir == 2 then
+            x = math.random(love.graphics.getWidth())
+            y = love.graphics.getHeight()
+        end
+        if startdir == 3 then
+            x = 0
+            y = math.random(love.graphics.getHeight())
+        end
+        if startdir == 4 then
+            x = math.random(love.graphics.getWidth())
+            y = 0
+        end
+
+        table.insert(enemyArray, Enemy.new(x, y, "/assets/images/golem.png"))
+    end
+
+    for _, enemy in pairs(enemyArray) do
+        local currentEnemySpeed = enemySpeed * dt
+        local isColliding = true
+        local nextEnemyCoordinates = enemy:getNextCoordinates(currentEnemySpeed, mySnail:getX(), mySnail:getY())
+        for _ = 1, 5 do
+            if (true == isColliding) then
+                currentEnemySpeed = currentEnemySpeed / 2
+                nextEnemyCoordinates = enemy:getNextCoordinates(currentEnemySpeed, mySnail:getX(), mySnail:getY())
+                local enemyData = {
+                    image = enemy.image,
+                    x = nextEnemyCoordinates.x,
+                    y = nextEnemyCoordinates.y
+                }
+                isColliding = areColliding(enemyData, obstacles)
+            end
+        end
+        if (false == isColliding) then
+            enemy:move(nextEnemyCoordinates.x, nextEnemyCoordinates.y)
+        end
+    end
 
     return "game"
 end
@@ -127,7 +191,12 @@ function game.draw()
 
     -- Draw background elements
     for _, data in pairs(backgroundElementsArray) do
-        love.graphics.draw(data['image'], data['x'], data['y'])
+        love.graphics.draw(data.image, data.x, data.y)
+    end
+
+    -- Draw obstacles
+    for _, data in pairs(obstacles) do
+        love.graphics.draw(data.image, data.x, data.y)
     end
 
     -- print FPS
@@ -145,7 +214,27 @@ function game.draw()
 
     -- Draw Classes
     mySnail:draw()
-    testEnemy:draw()
+    for _, enemy in pairs(enemyArray) do
+        enemy:draw()
+    end
+end
+
+function areColliding(enemy, obstaclesArray)
+    eWidth, eHeight = enemy.image:getDimensions()
+
+    for _, obstacle in pairs(obstaclesArray) do
+        oWidth, oHeight = obstacle.image:getDimensions()
+
+        if enemy.x < (obstacle.x + oWidth)
+                and obstacle.x < (enemy.x + eWidth)
+                and enemy.y < (obstacle.y + oHeight)
+                and obstacle.y < (enemy.y + eHeight)
+        then
+            return true
+        end
+    end
+
+    return false
 end
 
 return game
