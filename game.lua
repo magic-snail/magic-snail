@@ -13,9 +13,15 @@ local myBackground
 local backgroundElementsArray
 local mySnail
 local chanceOfNewEnemy = 100
-local enemyImages = {
-    '/assets/images/golem.png',
-    '/assets/images/blackbird.png'
+local enemyTypes = {
+    {
+        image = '/assets/images/golem.png',
+        stoppableByObstacle = true
+    },
+    {
+        image = '/assets/images/blackbird.png',
+        stoppableByObstacle = false
+    }
 }
 local enemyArray = {}
 local obstacles
@@ -171,8 +177,8 @@ function game.update(dt)
             y = 0
         end
 
-        local enemyImage = enemyImages[math.random(#enemyImages)]
-        table.insert(enemyArray, Enemy.new(x, y, enemyImage))
+        local enemyType = enemyTypes[math.random(#enemyTypes)]
+        table.insert(enemyArray, Enemy.new(x, y, enemyType.image, enemyType.stoppableByObstacle))
     end
 
     for _, enemy in pairs(enemyArray) do
@@ -180,16 +186,20 @@ function game.update(dt)
         local currentEnemySpeed = enemySpeed * dt
         local isColliding = true
         local nextEnemyCoordinates = enemy:getNextCoordinates(currentEnemySpeed, mySnail:getX(), mySnail:getY())
-        for _ = 1, 5 do
-            if (true == isColliding) then
-                currentEnemySpeed = currentEnemySpeed / 2
-                nextEnemyCoordinates = enemy:getNextCoordinates(currentEnemySpeed, mySnail:getX(), mySnail:getY())
-                local enemyData = {
-                    image = enemy.image,
-                    x = nextEnemyCoordinates.x,
-                    y = nextEnemyCoordinates.y
-                }
-                isColliding = areColliding(enemyData, obstacles)
+        if false == enemy.stoppableByObstacle then
+            isColliding = false
+        else
+            for _ = 1, 5 do
+                if (true == isColliding) then
+                    currentEnemySpeed = currentEnemySpeed / 2
+                    nextEnemyCoordinates = enemy:getNextCoordinates(currentEnemySpeed, mySnail:getX(), mySnail:getY())
+                    local enemyData = {
+                        image = enemy.image,
+                        x = nextEnemyCoordinates.x,
+                        y = nextEnemyCoordinates.y
+                    }
+                    isColliding = areColliding(enemyData, obstacles)
+                end
             end
         end
         if (false == isColliding) then
