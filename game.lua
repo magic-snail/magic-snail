@@ -26,6 +26,7 @@ function game.load()
     startTime = love.timer.getTime()
     snailSpeed = 1000
     enemySpeed = 300
+    enemyArray = {}
 
     local joysticks = love.joystick.getJoysticks()
     if joysticks[1] then
