@@ -196,7 +196,6 @@ function game.update(dt)
         isFirering = true
     end
 
-
     -- Stars Animation
     magicStars.currentTime = magicStars.currentTime + dt
     if magicStars.currentTime >= magicStars.duration then
