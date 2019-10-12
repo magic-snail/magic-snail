@@ -4,6 +4,7 @@ Snail.__index = Snail
 function Snail.new(x, y, imageLeft, imageRight, imageUp, imageDown)
     local sn = {}
     setmetatable(sn, Snail)
+
     sn.x = x
     sn.y = y
     sn.imageLeft = love.graphics.newImage(imageLeft)

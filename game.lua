@@ -205,7 +205,7 @@ function game.update(dt)
         table.insert(enemyArray, Enemy.new(x, y, enemyType.image, enemyType.stoppableByObstacle))
     end
 
-    for enemynum, enemy in pairs(enemyArray) do
+    for enemyNum, enemy in pairs(enemyArray) do
         -- Check colliding with obstacle
         local currentEnemySpeed = enemySpeed * dt
         local isColliding = true
@@ -248,14 +248,19 @@ function game.update(dt)
             y = nextEnemyCoordinates.y
         }
         local myElements = {}
-        for elementnum, element in ipairs(elements) do
-            table.insert(myElements, {num = elementnum, image = element.elm.image, x = element.elm.x, y = element.elm.y})
+        for elementNum, element in ipairs(elements) do
+            table.insert(myElements, {
+                num = elementNum,
+                image = element.elm.image,
+                x = element.elm.x,
+                y = element.elm.y
+            })
         end
-        isColliding, colidedwith = areColliding(enemyData, myElements)
+        isColliding, colidedWith = areColliding(enemyData, myElements)
 
         if isColliding then
-            enemyArray[enemynum] = nil
-            elements[colidedwith] = nil
+            enemyArray[enemyNum] = nil
+            elements[colidedWith] = nil
         end
     end
 
@@ -315,9 +320,9 @@ function areColliding(enemy, obstaclesArray)
         oWidth, oHeight = obstacle.image:getDimensions()
 
         if enemy.x < (obstacle.x + oWidth)
-                and obstacle.x < (enemy.x + eWidth)
-                and enemy.y < (obstacle.y + oHeight)
-                and obstacle.y < (enemy.y + eHeight)
+            and obstacle.x < (enemy.x + eWidth)
+            and enemy.y < (obstacle.y + oHeight)
+            and obstacle.y < (enemy.y + eHeight)
         then
             return true, colnum
         end
