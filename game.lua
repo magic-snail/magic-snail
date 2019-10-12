@@ -26,12 +26,12 @@ local enemyTypes = {
     },
     {
         image = '/assets/images/fire_hedgehog.png',
-        stoppableByObstacle = false,
+        stoppableByObstacle = true,
         killedBy = "water"
     },
     {
         image = '/assets/images/water_turtle.png',
-        stoppableByObstacle = false,
+        stoppableByObstacle = true,
         killedBy = "fire"
     },
 }
