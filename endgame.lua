@@ -8,8 +8,8 @@ function endgame.load(points)
     love.graphics.setBackgroundColor(0, 0, 0)
     endpoints = points
 
-    http.request("http://tclinux.de/snailscore.php?password=Geix7ei3oZey3reiJi6c&mode=set&score=" .. points)
-    highscores, b, c = http.request("http://tclinux.de/snailscore.php?password=Geix7ei3oZey3reiJi6c&mode=get")
+    place, _, _ = http.request("http://tclinux.de/snailscore.php?password=Geix7ei3oZey3reiJi6c&mode=set&score=" .. points)
+    highscores, _, _ = http.request("http://tclinux.de/snailscore.php?password=Geix7ei3oZey3reiJi6c&mode=get")
 end
 
 function endgame.update()
@@ -21,10 +21,13 @@ function endgame.draw()
     love.graphics.print('WORLDWIDE HIGHSCORES: ', 0, 50)
     i = 1
     for k, v in string.gmatch(highscores, "(%w+);(%w+)") do
-        love.graphics.print(k, 0, 0 + (100*i))
-        love.graphics.print(v, 0, 50 + (100*i))
-        i = i + 1
+        love.graphics.print(i .. ": ", 0, 50 + (50*i))
+        love.graphics.print(k, 50, 50 + (50*i))
+        love.graphics.print(i+1 .. ": ", 0, 100 + (50*i))
+        love.graphics.print(v, 50, 100 + (50*i))
+        i = i + 2
     end
+    love.graphics.print('You are on place: ' .. place, 0, 100 + (50*i))
 end
 
 return endgame
