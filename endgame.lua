@@ -8,8 +8,8 @@ function endgame.load(points)
     love.graphics.setBackgroundColor(0, 0, 0)
     endpoints = points
 
-    highscores, b, c = http.request("http://tclinux.de/snailscore.php?password=Geix7ei3oZey3reiJi6c&mode=get")
     http.request("http://tclinux.de/snailscore.php?password=Geix7ei3oZey3reiJi6c&mode=set&score=" .. points)
+    highscores, b, c = http.request("http://tclinux.de/snailscore.php?password=Geix7ei3oZey3reiJi6c&mode=get")
 end
 
 function endgame.update()
