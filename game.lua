@@ -215,7 +215,13 @@ function game.update(dt)
         end
 
         local enemyType = enemyTypes[math.random(#enemyTypes)]
-        table.insert(enemyArray, Enemy.new(x, y, enemyType.image, enemyType.stoppableByObstacle, enemyType.notKillableBy))
+        table.insert(enemyArray, Enemy.new(
+            x,
+            y,
+            enemyType.image,
+            enemyType.stoppableByObstacle,
+            enemyType.notKillableBy
+        ))
     end
 
     for enemyNum, enemy in pairs(enemyArray) do
