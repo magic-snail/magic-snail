@@ -222,7 +222,7 @@ function game.update(dt)
                         x = nextEnemyCoordinates.x,
                         y = nextEnemyCoordinates.y
                     }
-                    isColliding = areColliding(enemyData, obstacles)
+                    isColliding, _ = areColliding(enemyData, obstacles)
                 end
             end
         end
