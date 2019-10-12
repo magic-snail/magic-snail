@@ -1,3 +1,5 @@
+game = {}
+
 require 'snail'
 require 'enemy'
 
@@ -11,7 +13,7 @@ local backgroundElementsArray
 local mySnail
 local testEnemy
 
-function love.load()
+function game.load()
     -- Globals
     points = 0
     startTime = love.timer.getTime()
@@ -76,8 +78,11 @@ function love.load()
     testEnemy = Enemy.new(1000, 1000, "/assets/images/golem.png")
 end
 
-function love.update(dt)
+function game.update(dt)
     -- react to key presses
+    if love.keyboard.isDown("escape") then
+        return "start"
+    end
     if love.keyboard.isDown("down") then
         mySnail:moveY(snailSpeed * dt)
     end
@@ -108,9 +113,11 @@ function love.update(dt)
     end
 
     testEnemy:move(enemySpeed * dt, mySnail:getX(), mySnail:getY())
+
+    return "game"
 end
 
-function love.draw()
+function game.draw()
     -- Draw background image
     for i = 0, love.graphics.getWidth() / myBackground:getWidth() do
         for j = 0, love.graphics.getHeight() / myBackground:getHeight() do
@@ -140,3 +147,5 @@ function love.draw()
     mySnail:draw()
     testEnemy:draw()
 end
+
+return game
