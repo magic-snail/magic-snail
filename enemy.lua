@@ -1,7 +1,7 @@
 Enemy = {}
 Enemy.__index = Enemy
 
-function Enemy.new(x, y, image, stoppableByObstacle, killedBy)
+function Enemy.new(x, y, image, stoppableByObstacle, notKillableBy)
     local en = {}
     setmetatable(en, Enemy)
 
@@ -9,7 +9,7 @@ function Enemy.new(x, y, image, stoppableByObstacle, killedBy)
     en.y = y
     en.image = love.graphics.newImage(image)
     en.stoppableByObstacle = stoppableByObstacle
-    en.killedBy = killedBy
+    en.notKillableBy = notKillableBy
 
     return en
 end

@@ -82,6 +82,8 @@ function Snail:getCurrentImage()
 end
 
 function Snail:draw()
+    love.graphics.setColor(255, 0, 0, 128)
     love.graphics.draw(self:getCurrentImage(), self.x, self.y)
+    love.graphics.reset()
     self.snailWidth, self.snailHeight = self:getCurrentImage():getDimensions()
 end

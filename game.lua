@@ -17,22 +17,22 @@ local enemyTypes = {
     {
         image = '/assets/images/golem.png',
         stoppableByObstacle = true,
-        killedBy = "air"
+        notKillableBy = "earth"
     },
     {
         image = '/assets/images/blackbird.png',
         stoppableByObstacle = false,
-        killedBy = "earth"
+        notKillableBy = "air"
     },
     {
         image = '/assets/images/fire_hedgehog.png',
         stoppableByObstacle = true,
-        killedBy = "water"
+        notKillableBy = "fire"
     },
     {
         image = '/assets/images/water_turtle.png',
         stoppableByObstacle = true,
-        killedBy = "fire"
+        notKillableBy = "water"
     },
 }
 local enemyArray = {}
@@ -214,7 +214,7 @@ function game.update(dt)
         end
 
         local enemyType = enemyTypes[math.random(#enemyTypes)]
-        table.insert(enemyArray, Enemy.new(x, y, enemyType.image, enemyType.stoppableByObstacle, enemyType.killedBy))
+        table.insert(enemyArray, Enemy.new(x, y, enemyType.image, enemyType.stoppableByObstacle, enemyType.notKillableBy))
     end
 
     for enemyNum, enemy in pairs(enemyArray) do
@@ -271,7 +271,7 @@ function game.update(dt)
         isColliding, colidedWith = areColliding(enemyData, myElements)
 
         if isColliding then
-            if enemyArray[enemyNum].killedBy == elements[colidedWith].elm.type then
+            if enemyArray[enemyNum].notKillableBy ~= elements[colidedWith].elm.type then
                 enemyArray[enemyNum] = nil
             end
             elements[colidedWith] = nil
