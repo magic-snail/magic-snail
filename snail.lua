@@ -1,16 +1,17 @@
 Snail = {}
 Snail.__index = Snail
 
-function Snail.new(x, y, imageLeft, imageRight, imageUp, imageDown)
+function Snail.new(x, y)
     local sn = {}
     setmetatable(sn, Snail)
 
     sn.x = x
     sn.y = y
-    sn.imageLeft = love.graphics.newImage(imageLeft)
-    sn.imageRight = love.graphics.newImage(imageRight)
-    sn.imageUp = love.graphics.newImage(imageUp)
-    sn.imageDown = love.graphics.newImage(imageDown)
+
+    sn.imageLeft = love.graphics.newImage("/assets/images/snail_left.png")
+    sn.imageRight = love.graphics.newImage("/assets/images/snail_right.png")
+    sn.imageUp = love.graphics.newImage("/assets/images/snail_back.png")
+    sn.imageDown = love.graphics.newImage("/assets/images/snail_front.png")
     sn:setColor(1)
 
     -- 0 = right, 1 = down, 2 = left, 3 = up

@@ -131,14 +131,10 @@ function game.load()
         })
     end
 
-    -- Classes
+    -- add snail
     mySnail = Snail.new(
         love.graphics.getWidth() / 2,
-        love.graphics.getHeight() / 2,
-        "/assets/images/snail_left.png",
-        "/assets/images/snail_right.png",
-        "/assets/images/snail_back.png",
-        "/assets/images/snail_front.png"
+        love.graphics.getHeight() / 2
     )
 
     elements = {}
