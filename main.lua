@@ -7,10 +7,7 @@ local startTime
 local snailSpeed
 local enemySpeed
 local myBackground
-local myBackgroundGrass
-local backgroundGrassArray
-local myBackgroundMush
-local backgroundMushArray
+local backgroundElementsArray
 local mySnail
 local testEnemy
 
@@ -26,7 +23,6 @@ function love.load()
         joystick = joysticks[1]
     end
 
-
     local numGrass = 10
     local numMushroom = 10
 
@@ -41,25 +37,31 @@ function love.load()
     local snailIcon = love.image.newImageData('/assets/images/snail_left.png')
     love.window.setIcon(snailIcon)
 
-    -- Backgroundimage
+    -- base background image
     myBackground = love.graphics.newImage("/assets/images/green.png")
-    -- Array with grass
-    myBackgroundGrass = love.graphics.newImage("/assets/images/green_grass.png")
-    backgroundGrassArray = {}
-    for i = 1, numGrass + 1 do
-        backgroundGrassArray[i] = {}
-        backgroundGrassArray[i]["x"] = love.math.random(love.graphics.getWidth())
-        backgroundGrassArray[i]["y"] = love.math.random(love.graphics.getHeight())
+    -- add background elements
+    local myBackgroundGrass = love.graphics.newImage("/assets/images/green_grass_free.png")
+    local myBackgroundMush= love.graphics.newImage("/assets/images/green_mushroom_free.png")
+    backgroundElementsArray = {}
+    for _ = 1, numGrass + 1 do
+        table.insert(backgroundElementsArray, {
+            image = myBackgroundGrass,
+            x = love.math.random(love.graphics.getWidth()),
+            y = love.math.random(love.graphics.getHeight())
+        })
     end
-
-    -- Array with mushrooms
-    myBackgroundMush= love.graphics.newImage("/assets/images/green_mushroom.png")
-    backgroundMushArray = {}
-    for i = 1, numMushroom + 1 do
-        backgroundMushArray[i] = {}
-        backgroundMushArray[i]["x"] = love.math.random(love.graphics.getWidth())
-        backgroundMushArray[i]["y"] = love.math.random(love.graphics.getHeight())
+    for _ = 1, numMushroom + 1 do
+        table.insert(backgroundElementsArray, {
+            image = myBackgroundMush,
+            x = love.math.random(love.graphics.getWidth()),
+            y = love.math.random(love.graphics.getHeight())
+        })
     end
+    -- sort background elements by height
+    table.sort(
+        backgroundElementsArray,
+        function(a, b) return a['y'] < b['y'] end
+    )
 
     -- Classes
     mySnail = Snail.new(
@@ -109,21 +111,16 @@ function love.update(dt)
 end
 
 function love.draw()
-    -- Draw Backgroundimage
+    -- Draw background image
     for i = 0, love.graphics.getWidth() / myBackground:getWidth() do
         for j = 0, love.graphics.getHeight() / myBackground:getHeight() do
             love.graphics.draw(myBackground, i * myBackground:getWidth(), j * myBackground:getHeight())
         end
     end
 
-    -- Draw Grass
-    for _, position in pairs(backgroundGrassArray) do
-        love.graphics.draw(myBackgroundGrass, position["x"], position["y"])
-    end
-
-    -- Draw Mushrooms
-    for _, position in pairs(backgroundMushArray) do
-        love.graphics.draw(myBackgroundMush, position["x"], position["y"])
+    -- Draw background elements
+    for _, data in pairs(backgroundElementsArray) do
+        love.graphics.draw(data['image'], data['x'], data['y'])
     end
 
     -- print FPS
