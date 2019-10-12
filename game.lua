@@ -68,7 +68,7 @@ function game.load()
     local numMushroom = 10
     local numObstacles = 3
 
-    animstars = newAnimation(love.graphics.newImage("/assets/images/stars_sprite.png"), 36, 48, 1)
+    animstars = newAnimation(love.graphics.newImage("/assets/images/stars_sprite.png"), 128, 128, 1)
 
     -- base background image
     myBackground = love.graphics.newImage("/assets/images/green.png")
@@ -348,7 +348,7 @@ function game.draw()
     -- draw Animations
     if isFirering then
         local spriteNum = math.floor(animstars.currentTime / animstars.duration * #animstars.quads) + 1
-        love.graphics.draw(animstars.spriteSheet, animstars.quads[spriteNum], mySnail.x, mySnail.y - 30)
+        love.graphics.draw(animstars.spriteSheet, animstars.quads[spriteNum], mySnail.x, mySnail.y - 110)
     end
 
     -- Draw Classes
