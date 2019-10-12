@@ -1,6 +1,7 @@
 require 'snail'
 require 'enemy'
 
+local joystick
 local points
 local startTime
 local snailSpeed
@@ -19,6 +20,13 @@ function love.load()
     startTime = love.timer.getTime()
     snailSpeed = 1000
     enemySpeed = 300
+
+    local joysticks = love.joystick.getJoysticks()
+    if joysticks[1] then
+        joystick = joysticks[1]
+    end
+
+
     local numGrass = 10
     local numMushroom = 10
 
@@ -80,6 +88,23 @@ function love.update(dt)
     if love.keyboard.isDown("right") then
         mySnail:moveX(snailSpeed * dt)
     end
+
+    if joystick then
+        local x, y = joystick.getAxes(joystick)
+        if x < 0 then
+            mySnail:moveX(- speed * dt)
+        end
+        if x > 0 then
+            mySnail:moveX(speed * dt)
+        end
+        if y < 0 then
+            mySnail:moveY(- speed * dt)
+        end
+        if y > 0 then
+            mySnail:moveY(speed * dt)
+        end
+    end
+
     testEnemy:move(enemySpeed * dt, mySnail:getX(), mySnail:getY())
 end
 
@@ -107,7 +132,7 @@ function love.draw()
 
     -- print Infos
     love.graphics.setNewFont(25)
-    love.graphics.print("Points: " .. points, 0, 0)
+    love.graphics.print("Points: " .. string.format("%05d", points), 0, 0)
     love.graphics.print(
         "Time: " .. string.format("%04d", math.floor(love.timer.getTime() - startTime)),
         love.graphics.getWidth()-150,
