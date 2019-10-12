@@ -199,6 +199,7 @@ function game.update(dt)
         isFirering = true
     end
 
+
     -- Stars Animation
     animstars.currentTime = animstars.currentTime + dt
     if animstars.currentTime >= animstars.duration then
@@ -219,6 +220,23 @@ function game.update(dt)
                 currentElement = currentElement - 1;
             end
         end
+        mySnail:setColor(currentElement)
+    end
+
+    if love.keyboard.isDown("1") then
+        currentElement = 1
+        mySnail:setColor(currentElement)
+    end
+    if love.keyboard.isDown("2") then
+        currentElement = 2
+        mySnail:setColor(currentElement)
+    end
+    if love.keyboard.isDown("3") then
+        currentElement = 3
+        mySnail:setColor(currentElement)
+    end
+    if love.keyboard.isDown("4") then
+        currentElement = 4
         mySnail:setColor(currentElement)
     end
 
