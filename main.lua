@@ -11,7 +11,7 @@ end
 
 function love.update(dt)
     if gamestate == "start" then
-        newstate = start.update(dt)
+        newstate = start.update()
     elseif gamestate == "game" then
         newstate = game.update(dt)
     end

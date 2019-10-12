@@ -3,7 +3,7 @@ start = {}
 function start.load()
 end
 
-function start.update(dt)
+function start.update()
     if love.keyboard.isDown("space") then
         return "game"
     elseif love.keyboard.isDown("escape") then
