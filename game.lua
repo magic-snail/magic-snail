@@ -17,13 +17,23 @@ local enemyTypes = {
     {
         image = '/assets/images/golem.png',
         stoppableByObstacle = true,
-        killedBy = "fire"
+        killedBy = "air"
     },
     {
         image = '/assets/images/blackbird.png',
         stoppableByObstacle = false,
-        killedBy = "air"
-    }
+        killedBy = "earth"
+    },
+    {
+        image = '/assets/images/fire_hedgehog.png',
+        stoppableByObstacle = false,
+        killedBy = "water"
+    },
+    {
+        image = '/assets/images/water_turtle.png',
+        stoppableByObstacle = false,
+        killedBy = "fire"
+    },
 }
 local enemyArray = {}
 local obstacles
