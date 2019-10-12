@@ -11,14 +11,22 @@ function Enemy.new(x, y, image)
     return en
 end
 
-function Enemy:move(speed, snailX, snailY)
+function Enemy:getNextCoordinates(speed, snailX, snailY)
     local directionVectorX = self.x - snailX
     local directionVectorY = self.y - snailY
     local distance = math.sqrt(directionVectorX ^ 2 + directionVectorY ^ 2)
     local sinAlpha = directionVectorY / distance
     local sinBeta = directionVectorX / distance
-    self.x = self.x - sinBeta * speed
-    self.y = self.y - sinAlpha * speed
+
+    return {
+        x = self.x - sinBeta * speed,
+        y = self.y - sinAlpha * speed
+    }
+end
+
+function Enemy:move(x, y)
+    self.x = x
+    self.y = y
 end
 
 function Enemy:draw()
