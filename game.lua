@@ -13,6 +13,7 @@ local myBackground
 local backgroundElementsArray
 local mySnail
 local chanceOfNewEnemy = 50
+local isFirering = false
 local enemyTypes = {
     {
         image = '/assets/images/golem.png',
@@ -66,6 +67,8 @@ function game.load()
     local numGrass = 10
     local numMushroom = 10
     local numObstacles = 3
+
+    animstars = newAnimation(love.graphics.newImage("/assets/images/stars_sprite.png"), 36, 48, 1)
 
     -- base background image
     myBackground = love.graphics.newImage("/assets/images/green.png")
@@ -131,6 +134,7 @@ function game.load()
 end
 
 function game.update(dt)
+    isFirering = false
     -- react to key presses
     if love.keyboard.isDown("down") or love.keyboard.isDown("s") then
         mySnail:moveY(snailSpeed * dt)
@@ -174,6 +178,13 @@ function game.update(dt)
                 table.insert(elements, {elm = em, time = os.time()})
             end
         end
+        isFirering = true
+    end
+
+    -- Stars Animation
+    animstars.currentTime = animstars.currentTime + dt
+    if animstars.currentTime >= animstars.duration then
+        animstars.currentTime = animstars.currentTime - animstars.duration
     end
 
     function love.wheelmoved(_, y)
@@ -321,10 +332,6 @@ function game.draw()
         em.elm:draw()
     end
 
-    -- print FPS
-    love.graphics.setNewFont(15)
-    love.graphics.print("FPS: " .. love.timer.getFPS(), 0, 50)
-
     -- print Infos
     love.graphics.setNewFont(25)
     love.graphics.print("Points: " .. string.format("%05d", points), 0, 0)
@@ -337,6 +344,12 @@ function game.draw()
     -- print current Element
     eimg = love.graphics.newImage(elementImgs[currentElement])
     love.graphics.draw(eimg, 0, 100)
+
+    -- draw Animations
+    if isFirering then
+        local spriteNum = math.floor(animstars.currentTime / animstars.duration * #animstars.quads) + 1
+        love.graphics.draw(animstars.spriteSheet, animstars.quads[spriteNum], mySnail.x, mySnail.y - 30)
+    end
 
     -- Draw Classes
     mySnail:draw()
@@ -361,6 +374,23 @@ function areColliding(enemy, obstaclesArray)
     end
 
     return false, -1
+end
+
+function newAnimation(image, width, height, duration)
+    local animation = {}
+    animation.spriteSheet = image;
+    animation.quads = {};
+
+    for y = 0, image:getHeight() - height, height do
+        for x = 0, image:getWidth() - width, width do
+            table.insert(animation.quads, love.graphics.newQuad(x, y, width, height, image:getDimensions()))
+        end
+    end
+
+    animation.duration = duration or 1
+    animation.currentTime = 0
+
+    return animation
 end
 
 return game
