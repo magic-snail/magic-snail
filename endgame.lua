@@ -25,20 +25,20 @@ function endgame.draw()
     logoX = windowWidth / 2 - logoImage:getWidth() / 2
     logoY = windowHeight / 2 - logoImage:getHeight() / 2
     love.graphics.draw(logoImage, logoX, logoY)
-    logoX = logoX + 20;
+    logoX = logoX + 30;
 
-    love.graphics.print('You have been eaten! Your points: ' .. endpoints, logoX, logoY)
+    love.graphics.print('You have been eaten! Your points: ' .. endpoints, logoX, logoY + 20)
 
-    love.graphics.print('WORLDWIDE HIGHSCORES: ', logoX, logoY + 50)
-    i = 1
+    love.graphics.print('WORLDWIDE HIGHSCORES: ', logoX, logoY + 70)
+    local i = 1
     for k, v in string.gmatch(highscores, "(%w+);(%w+)") do
-        love.graphics.print(i .. ": ", logoX, logoY + 40 + (40*i))
-        love.graphics.print(k, logoX + 50, logoY + 40 + (40*i))
-        love.graphics.print(i+1 .. ": ", logoX, logoY + 80 + (40*i))
-        love.graphics.print(v, logoX + 50, logoY + 80 + (40*i))
+        love.graphics.print(i .. ": ", logoX, logoY + 70 + (35*i))
+        love.graphics.print(k, logoX + 50, logoY + 70 + (35*i))
+        love.graphics.print(i+1 .. ": ", logoX, logoY + 105 + (35*i))
+        love.graphics.print(v, logoX + 50, logoY + 105 + (35*i))
         i = i + 2
     end
-    love.graphics.print('You are on place: ' .. place, logoX, logoY + 40 + (40*i))
+    love.graphics.print('You are on place: ' .. place, logoX, logoY + 90 + (35*i))
 end
 
 return endgame
