@@ -10,7 +10,7 @@ function love.load()
     local myBackgroundSound = love.audio.newSource("/assets/music/sneaky_snitch.mp3", "stream")
     myBackgroundSound:setLooping(true)
     myBackgroundSound:play()
-    
+
     love.graphics.setNewFont(25)
     gamestate = "start"
     start.load()
