@@ -262,10 +262,10 @@ function game.update(dt)
         -- Check colloding with snail
         eWidth, eHeight = enemy.image:getDimensions()
 
-        if enemy.x < (mySnail.x + mySnail.snailWidth)
-                and mySnail.x < (enemy.x + eWidth)
-                and enemy.y < (mySnail.y + mySnail.snailHeight)
-                and mySnail.y < (enemy.y + eHeight)
+        if enemy.x < (mySnail.x + mySnail.snailWidth - 30)
+                and mySnail.x < (enemy.x + eWidth - 30)
+                and enemy.y < (mySnail.y + mySnail.snailHeight - 30)
+                and mySnail.y < (enemy.y + eHeight - 30)
         then
             return "dead", points
         end
