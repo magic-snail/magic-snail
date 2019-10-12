@@ -71,7 +71,7 @@ function love.load()
         "/assets/images/snail_front.png"
     )
 
-    testEnemy = Enemy.new(1000, 1000, "/assets/images/snail_left.png")
+    testEnemy = Enemy.new(1000, 1000, "/assets/images/golem.png")
 end
 
 function love.update(dt)
