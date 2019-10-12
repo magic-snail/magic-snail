@@ -10,7 +10,7 @@ function start.load()
     textColor = {0, 0, 0}
     coloredText = {textColor, "Press SPACE to start!"}
     love.graphics.setBackgroundColor(255, 255, 255)
-    logoImage = love.graphics.newImage('/assets/images/snail_icon.png')
+    logoImage = love.graphics.newImage('/assets/images/magic_snail_start_background.png')
 end
 
 function start.update()
@@ -30,7 +30,7 @@ function start.draw()
     love.graphics.draw(logoImage, logoX, logoY)
 
     love.graphics.setFont(startFont)
-    local textYPos = windowHeight / 2 + logoImage:getHeight() / 2 + 100
+    local textYPos = windowHeight / 2 + logoImage:getHeight() / 2 - 100
     love.graphics.printf(coloredText, 0, textYPos, windowWidth, "center")
 end
 
