@@ -101,7 +101,12 @@ function game.load()
     )
 
     elements = {}
-    elementImgs = {"/assets/images/fire_ball.png", "/assets/images/water_ball.png", "/assets/images/earth_ball.png", "/assets/images/air_ball.png"}
+    elementImgs = {
+        "/assets/images/fire_ball.png",
+        "/assets/images/water_ball.png",
+        "/assets/images/earth_ball.png",
+        "/assets/images/air_ball.png"
+    }
     currentElement = 1
 end
 
