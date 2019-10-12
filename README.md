@@ -17,7 +17,7 @@ Linux
 
 1. Download (and install) [löve](https://love2d.org)
 2. Download [magic-snail.love](https://github.com/magic-snail/magic-snail/releases/latest/download/magic-snail.love)
-3. Execute `love magic-snail.loce`
+3. Execute `love magic-snail.love`
 
 Windows
 -------
