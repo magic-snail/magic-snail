@@ -15,9 +15,9 @@ end
 function start.update()
     if love.keyboard.isDown("space") or love.mouse.isDown(1) then
         return "game"
-    else
-        return "start"
     end
+
+    return "start"
 end
 
 function start.draw()
