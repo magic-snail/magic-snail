@@ -12,6 +12,7 @@ zip -q -9 -r dist/magic-snail.love . \
     --exclude=*dist/*
 echo 'done.'
 
+(
 cd dist/
 
 # build for windows
@@ -35,3 +36,13 @@ cp ../assets/build/Info.plist magic-snail.app/Contents/Info.plist
 zip -q -9 -y -r magic-snail-macos.zip magic-snail.app
 rm -r magic-snail.app
 echo 'done.'
+)
+
+# build for linux
+hg clone https://bitbucket.org/bartbes/love-linux-builder
+cp dist/magic-snail.love game.love
+cd love-linux-builder/tarball
+./build.sh
+tar czf "love-11.2-x86_64.tar.gz" dest
+cd ../appimage
+./build.sh 11.2
