@@ -36,12 +36,6 @@ function game.load()
     myBackgroundSound:setLooping(true)
     myBackgroundSound:play()
 
-    -- Window
-    love.window.setFullscreen(true)
-    love.window.setTitle('Magic Snail')
-    local snailIcon = love.image.newImageData('/assets/images/snail_left.png')
-    love.window.setIcon(snailIcon)
-
     -- base background image
     myBackground = love.graphics.newImage("/assets/images/green.png")
     -- add background elements
