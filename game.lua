@@ -272,9 +272,9 @@ function game.update(dt)
 
         if isColliding then
             if enemyArray[enemyNum].notKillableBy ~= elements[colidedWith].elm.type then
-                enemyArray[enemyNum] = nil
+                table.remove(enemyArray, enemyNum)
             end
-            elements[colidedWith] = nil
+            table.remove(elements, colidedWith)
         end
     end
 
