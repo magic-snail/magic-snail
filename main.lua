@@ -9,7 +9,8 @@ local enemySpeed
 local myBackground
 local backgroundElementsArray
 local mySnail
-local testEnemy
+local chanceOfNewEnemy = 100
+local enemyArray = {}
 
 function love.load()
     -- Globals
@@ -72,8 +73,6 @@ function love.load()
         "/assets/images/snail_back.png",
         "/assets/images/snail_front.png"
     )
-
-    testEnemy = Enemy.new(1000, 1000, "/assets/images/golem.png")
 end
 
 function love.update(dt)
@@ -106,8 +105,14 @@ function love.update(dt)
             mySnail:moveY(snailSpeed * dt)
         end
     end
+    
+    if math.random(100 / dt) < (chanceOfNewEnemy + 1) then
+        table.insert(enemyArray, Enemy.new(1000, 1000, "/assets/images/golem.png"))
+    end
 
-    testEnemy:move(enemySpeed * dt, mySnail:getX(), mySnail:getY())
+    for _, enemy in pairs(enemyArray) do
+        enemy:move(enemySpeed * dt, mySnail:getX(), mySnail:getY())
+    end
 end
 
 function love.draw()
@@ -138,5 +143,7 @@ function love.draw()
 
     -- Draw Classes
     mySnail:draw()
-    testEnemy:draw()
+    for _, enemy in pairs(enemyArray) do
+        enemy:draw()
+    end
 end
