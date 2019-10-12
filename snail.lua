@@ -18,6 +18,14 @@ function Snail.new(x, y, imageLeft, imageRight, imageUp, imageDown)
     return sn
 end
 
+function Snail:getX()
+    return self.x
+end
+
+function Snail:getY()
+    return self.y
+end
+
 function Snail:moveX(p)
     -- 0 = right, 1 = down, 2 = left, 3 = up
     if p < 0 then
@@ -56,18 +64,22 @@ function Snail:moveY(p)
     end
 end
 
-function Snail:draw()
+function Snail:getCurrentImage()
     -- 0 = right, 1 = down, 2 = left, 3 = up
     if self.facingDirection == 0 then
-        love.graphics.draw(self.imageRight, self.x, self.y)
+        return self.imageRight
     end
     if self.facingDirection == 1 then
-        love.graphics.draw(self.imageDown, self.x, self.y)
+        return self.imageDown
     end
     if self.facingDirection == 2 then
-        love.graphics.draw(self.imageLeft, self.x, self.y)
+        return self.imageLeft
     end
     if self.facingDirection == 3 then
-        love.graphics.draw(self.imageUp, self.x, self.y)
+        return self.imageUp
     end
+end
+
+function Snail:draw()
+    love.graphics.draw(self:getCurrentImage(), self.x, self.y)
 end
