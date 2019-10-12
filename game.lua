@@ -217,7 +217,7 @@ function game.draw()
         love.graphics.draw(data.image, data.x, data.y)
     end
 
-    for i,em in ipairs(elements) do
+    for _,em in ipairs(elements) do
         em.elm:draw()
     end
 
