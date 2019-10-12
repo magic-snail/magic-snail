@@ -39,15 +39,15 @@ echo 'done.'
 )
 
 # build for linux
-echo 'Building for Linux ...'
+echo -n 'Building for Linux ... '
 (
-hg clone https://bitbucket.org/bartbes/love-linux-builder
+hg clone https://bitbucket.org/bartbes/love-linux-builder > /dev/null
 cp dist/magic-snail.love love-linux-builder/game.love
 cd love-linux-builder/tarball
-./build.sh
+./build.sh > /dev/null
 tar czf "love-11.2-x86_64.tar.gz" dest
 cd ../appimage
-./build.sh 11.2
+./build.sh 11.2 > /dev/null
 )
-cp love-linux-builder/appimage/game-x86_64.AppImage dist/magic-snail-x86_64.AppImage
+cp love-linux-builder/appimage/game-x86_64.AppImage dist/magic-snail-linux.AppImage
 echo 'done.'
