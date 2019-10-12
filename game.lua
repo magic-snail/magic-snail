@@ -17,22 +17,30 @@ local enemyTypes = {
     {
         image = '/assets/images/golem.png',
         stoppableByObstacle = true,
-        notKillableBy = "earth"
+        notKillableBy = "earth",
+        points = 10,
+        speed = 0.5
     },
     {
         image = '/assets/images/blackbird.png',
         stoppableByObstacle = false,
-        notKillableBy = "air"
+        notKillableBy = "air",
+        points = 30,
+        speed = 1.5
     },
     {
         image = '/assets/images/fire_hedgehog.png',
         stoppableByObstacle = true,
-        notKillableBy = "fire"
+        notKillableBy = "fire",
+        points = 10,
+        speed = 1
     },
     {
         image = '/assets/images/water_turtle.png',
         stoppableByObstacle = true,
-        notKillableBy = "water"
+        notKillableBy = "water",
+        points = 10,
+        speed = 0.5
     },
 }
 local enemyArray = {}
@@ -220,7 +228,9 @@ function game.update(dt)
             y,
             enemyType.image,
             enemyType.stoppableByObstacle,
-            enemyType.notKillableBy
+            enemyType.notKillableBy,
+            enemyType.points,
+            enemyType.speed
         ))
     end
 
@@ -279,6 +289,7 @@ function game.update(dt)
 
         if isColliding then
             if enemyArray[enemyNum].notKillableBy ~= elements[colidedWith].elm.type then
+                points = points + enemy.points
                 table.remove(enemyArray, enemyNum)
             end
             table.remove(elements, colidedWith)
