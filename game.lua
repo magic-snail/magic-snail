@@ -170,6 +170,7 @@ function game.update(dt)
                 currentElement = currentElement - 1;
             end
         end
+        mySnail:setColor(currentElement)
     end
 
     for i,em in ipairs(elements) do

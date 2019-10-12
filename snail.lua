@@ -11,6 +11,7 @@ function Snail.new(x, y, imageLeft, imageRight, imageUp, imageDown)
     sn.imageRight = love.graphics.newImage(imageRight)
     sn.imageUp = love.graphics.newImage(imageUp)
     sn.imageDown = love.graphics.newImage(imageDown)
+    sn.color = {r = 30, g = 0, b = 0, a = 100}
 
     -- 0 = right, 1 = down, 2 = left, 3 = up
     sn.facingDirection = 0
@@ -82,6 +83,18 @@ function Snail:getCurrentImage()
 end
 
 function Snail:draw()
+    love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
     love.graphics.draw(self:getCurrentImage(), self.x, self.y)
+    love.graphics.reset()
     self.snailWidth, self.snailHeight = self:getCurrentImage():getDimensions()
+end
+
+function Snail:setColor(currentElement)
+    local elementColors = {
+        {r = 204, g = 0, b = 51, a = 100},
+        {r = 0, g = 102, b = 153, a = 100},
+        {r = 190, g = 190, b = 190, a = 100},
+        {r = 255, g = 255, b = 0, a = 100}
+    }
+    self.color = {r = elementColors[currentElement].r, g = elementColors[currentElement].g, b = elementColors[currentElement].b, a = elementColors[currentElement].a}
 end
