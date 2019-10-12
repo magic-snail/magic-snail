@@ -267,7 +267,7 @@ function game.update(dt)
                 and enemy.y < (mySnail.y + mySnail.snailHeight)
                 and mySnail.y < (enemy.y + eHeight)
         then
-            return "dead"
+            return "dead", points
         end
 
         -- Check colliding with Element

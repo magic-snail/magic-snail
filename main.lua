@@ -20,7 +20,7 @@ function love.update(dt)
     if gamestate == "start" then
         newstate = start.update()
     elseif gamestate == "game" then
-        newstate = game.update(dt)
+        newstate, points = game.update(dt)
     end
 
     if gamestate ~= newstate then
@@ -30,7 +30,7 @@ function love.update(dt)
         elseif newstate == "game" then
             game.load()
         elseif newstate == "dead" then
-            endgame.load()
+            endgame.load(points)
         end
     end
 end
