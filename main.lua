@@ -1,24 +1,31 @@
 require 'snail'
+require 'enemy'
 
 local joystick
 local points
 local startTime
-local speed
+local snailSpeed
+local enemySpeed
 local myBackground
 local myBackgroundGrass
 local backgroundGrassArray
 local myBackgroundMush
 local backgroundMushArray
 local mySnail
+local testEnemy
 
 function love.load()
     -- Globals
     points = 0
     startTime = love.timer.getTime()
-    speed = 1000
+    snailSpeed = 1000
+    enemySpeed = 300
 
     local joysticks = love.joystick.getJoysticks()
-    if joysticks[1] then joystick = joysticks[1] end
+    if joysticks[1] then
+        joystick = joysticks[1]
+    end
+
 
     local numGrass = 10
     local numMushroom = 10
@@ -63,29 +70,42 @@ function love.load()
         "/assets/images/snail_back.png",
         "/assets/images/snail_front.png"
     )
+
+    testEnemy = Enemy.new(1000, 1000, "/assets/images/snail_left.png")
 end
 
 function love.update(dt)
     -- react to key presses
     if love.keyboard.isDown("down") then
-        mySnail:moveY(speed * dt)
+        mySnail:moveY(snailSpeed * dt)
     end
     if love.keyboard.isDown("up") then
-        mySnail:moveY(- speed * dt)
+        mySnail:moveY(- snailSpeed * dt)
     end
     if love.keyboard.isDown("left") then
-        mySnail:moveX(- speed * dt)
+        mySnail:moveX(- snailSpeed * dt)
     end
     if love.keyboard.isDown("right") then
-        mySnail:moveX(speed * dt)
+        mySnail:moveX(snailSpeed * dt)
     end
+
     if joystick then
         local x, y = joystick.getAxes(joystick)
-        if x < 0 then mySnail:moveX(- speed * dt) end
-        if x > 0 then mySnail:moveX(speed * dt) end
-        if y < 0 then mySnail:moveY(- speed * dt) end
-        if y > 0 then mySnail:moveY(speed * dt) end
+        if x < 0 then
+            mySnail:moveX(- snailSpeed * dt)
+        end
+        if x > 0 then
+            mySnail:moveX(snailSpeed * dt)
+        end
+        if y < 0 then
+            mySnail:moveY(- snailSpeed * dt)
+        end
+        if y > 0 then
+            mySnail:moveY(snailSpeed * dt)
+        end
     end
+
+    testEnemy:move(enemySpeed * dt, mySnail:getX(), mySnail:getY())
 end
 
 function love.draw()
@@ -121,4 +141,5 @@ function love.draw()
 
     -- Draw Classes
     mySnail:draw()
+    testEnemy:draw()
 end

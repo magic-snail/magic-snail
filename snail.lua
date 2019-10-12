@@ -18,6 +18,14 @@ function Snail.new(x, y, imageLeft, imageRight, imageUp, imageDown)
     return sn
 end
 
+function Snail:getX()
+    return self.x
+end
+
+function Snail:getY()
+    return self.y
+end
+
 function Snail:moveX(p)
     -- 0 = right, 1 = down, 2 = left, 3 = up
     if p < 0 then
