@@ -20,11 +20,9 @@ function endgame.update()
 end
 
 function endgame.draw()
-    local windowWidth, windowHeight
-    local logoX, logoY
-    windowWidth, windowHeight = love.window.getMode()
-    logoX = windowWidth / 2 - logoImage:getWidth() / 2
-    logoY = windowHeight / 2 - logoImage:getHeight() / 2
+    local windowWidth, windowHeight = love.window.getMode()
+    local logoX = windowWidth / 2 - logoImage:getWidth() / 2
+    local logoY = windowHeight / 2 - logoImage:getHeight() / 2
     love.graphics.draw(logoImage, logoX, logoY)
     logoX = logoX + 30;
 
@@ -43,4 +41,3 @@ function endgame.draw()
 end
 
 return endgame
-
