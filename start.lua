@@ -14,7 +14,7 @@ function start.load()
 end
 
 function start.update()
-    if love.keyboard.isDown("space") then
+    if love.keyboard.isDown("space") or love.mouse.isDown(1) then
         return "game"
     else
         return "start"
