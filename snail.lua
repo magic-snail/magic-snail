@@ -96,5 +96,10 @@ function Snail:setColor(currentElement)
         {r = 0, g = 0, b = 0, a = 0.5},
         {r = 255, g = 255, b = 0, a = 100}
     }
-    self.color = {r = elementColors[currentElement].r, g = elementColors[currentElement].g, b = elementColors[currentElement].b, a = elementColors[currentElement].a}
+    self.color = {
+        r = elementColors[currentElement].r,
+        g = elementColors[currentElement].g,
+        b = elementColors[currentElement].b,
+        a = elementColors[currentElement].a
+    }
 end
