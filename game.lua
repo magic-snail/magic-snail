@@ -35,11 +35,6 @@ function game.load()
     local numMushroom = 10
     local numObstacles = 3
 
-    -- Backgroundsound
-    local myBackgroundSound = love.audio.newSource("/assets/music/sneaky_snitch.mp3", "stream")
-    myBackgroundSound:setLooping(true)
-    myBackgroundSound:play()
-
     -- base background image
     myBackground = love.graphics.newImage("/assets/images/green.png")
     -- add background elements
@@ -128,7 +123,7 @@ function game.update(dt)
     if math.random(100 / dt) < (chanceOfNewEnemy + 1) then
         local x, y
         -- 1 = right, 2 = down, 3 = left, 4 = up
-        startdir = math.max(1, math.floor(math.random(4)))
+        startdir =math.random(4)
         if startdir == 1 then
             x = love.graphics.getWidth()
             y = math.random(love.graphics.getHeight())
@@ -151,6 +146,7 @@ function game.update(dt)
     end
 
     for _, enemy in pairs(enemyArray) do
+        -- Check colliding with obstacle
         local currentEnemySpeed = enemySpeed * dt
         local isColliding = true
         local nextEnemyCoordinates = enemy:getNextCoordinates(currentEnemySpeed, mySnail:getX(), mySnail:getY())
@@ -168,6 +164,17 @@ function game.update(dt)
         end
         if (false == isColliding) then
             enemy:move(nextEnemyCoordinates.x, nextEnemyCoordinates.y)
+        end
+
+        -- Check colloding with snail
+        eWidth, eHeight = enemy.image:getDimensions()
+
+        if enemy.x < (mySnail.x + mySnail.snailWidth)
+                and mySnail.x < (enemy.x + eWidth)
+                and enemy.y < (mySnail.y + mySnail.snailHeight)
+                and mySnail.y < (enemy.y + eHeight)
+        then
+            return "dead"
         end
     end
 

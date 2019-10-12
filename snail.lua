@@ -10,10 +10,10 @@ function Snail.new(x, y, imageLeft, imageRight, imageUp, imageDown)
     sn.imageRight = love.graphics.newImage(imageRight)
     sn.imageUp = love.graphics.newImage(imageUp)
     sn.imageDown = love.graphics.newImage(imageDown)
-    sn.snailWidth, sn.snailHeight = sn.imageLeft:getDimensions()
 
     -- 0 = right, 1 = down, 2 = left, 3 = up
     sn.facingDirection = 0
+    sn.snailWidth, sn.snailHeight = sn:getCurrentImage():getDimensions()
 
     return sn
 end
@@ -82,4 +82,5 @@ end
 
 function Snail:draw()
     love.graphics.draw(self:getCurrentImage(), self.x, self.y)
+    self.snailWidth, self.snailHeight = self:getCurrentImage():getDimensions()
 end
