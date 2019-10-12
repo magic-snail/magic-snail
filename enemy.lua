@@ -12,6 +12,7 @@ function Enemy.new(x, y, image, stoppableByObstacle, notKillableBy, points, spee
     en.notKillableBy = notKillableBy
     en.points = points
     en.speed = speed
+    en.flipped = false
 
     return en
 end
@@ -23,10 +24,16 @@ function Enemy:getNextCoordinates(speed, snailX, snailY)
     local sinAlpha = directionVectorY / distance
     local sinBeta = directionVectorX / distance
 
-    return {
-        x = self.x - sinBeta * speed,
-        y = self.y - sinAlpha * speed
-    }
+    local newX = self.x - sinBeta * speed
+    local newY = self.y - sinAlpha * speed
+
+    if newX > self.x then
+        self.flipped = true
+    else
+        self.flipped = false
+    end
+
+    return {x = newX, y = newY}
 end
 
 function Enemy:move(x, y)
@@ -35,5 +42,9 @@ function Enemy:move(x, y)
 end
 
 function Enemy:draw()
-    love.graphics.draw(self.image, self.x, self.y)
+    if self.flipped then
+        love.graphics.draw(self.image, self.x + self.image:getWidth(), self.y, 0, -1, 1)
+    else
+        love.graphics.draw(self.image, self.x, self.y)
+    end
 end
