@@ -25,3 +25,10 @@ Windows
 1. Download [magic-snail-win64.zip](https://github.com/magic-snail/magic-snail/releases/latest/download/magic-snail-win64.zip)
 2. Extract it
 3. Execute `magic-snail.exe`
+
+MacOS
+-----
+
+1. Download [magic-snail-macos.zip](https://github.com/magic-snail/magic-snail/releases/latest/download/magic-snail-macos.zip)
+2. Extract it
+3. Open `magic-snail` (ignore warnings about missing verification)
