@@ -8,10 +8,13 @@ function Element.new(x, y, directionX, directionY, image, type)
     em.x = x
     em.y = y
     em.image = love.graphics.newImage(image)
-    if type == 1 then em.type = "fire" end
-    if type == 2 then em.type = "water" end
-    if type == 3 then em.type = "earth" end
-    if type == 4 then em.type = "air" end
+    local types = {
+        "fire",
+        "water",
+        "earth",
+        "air"
+    }
+    em.type = types[type]
 
     local dir = math.atan2(x-directionX,y-directionY)
     em.ax = math.sin(dir)
@@ -20,9 +23,9 @@ function Element.new(x, y, directionX, directionY, image, type)
     return em
 end
 
-function Element:fire(p)
-    self.x = self.x - self.ax * p
-    self.y = self.y - self.ay * p
+function Element:update(dt)
+    self.x = self.x - self.ax * dt
+    self.y = self.y - self.ay * dt
 end
 
 function Element:draw()

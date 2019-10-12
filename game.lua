@@ -241,7 +241,7 @@ function game.update(dt)
     end
 
     for i,em in ipairs(elements) do
-        em.elm:fire(1000 * dt)
+        em.elm:update(1000 * dt)
         time = os.time() - 1
         if em.time < time then
             table.remove(elements, i)

@@ -22,9 +22,9 @@ function start.update()
 end
 
 function start.draw()
-    local windowWidth, windowHeight, _
+    local windowWidth, windowHeight
     local logoX, logoY
-    windowWidth, windowHeight, _ = love.window.getMode()
+    windowWidth, windowHeight = love.window.getMode()
     logoX = windowWidth / 2 - logoImage:getWidth() / 2
     logoY = windowHeight / 2 - logoImage:getHeight() / 2
     love.graphics.draw(logoImage, logoX, logoY)

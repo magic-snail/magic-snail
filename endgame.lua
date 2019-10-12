@@ -1,9 +1,10 @@
 local http = require("socket.http")
-local logoImage
 
 endgame = {}
 
+local logoImage
 local endpoints
+
 function endgame.load(points)
     love.graphics.setNewFont(25)
     love.graphics.setBackgroundColor(0, 0, 0)
@@ -19,9 +20,9 @@ function endgame.update()
 end
 
 function endgame.draw()
-    local windowWidth, windowHeight, _
+    local windowWidth, windowHeight
     local logoX, logoY
-    windowWidth, windowHeight, _ = love.window.getMode()
+    windowWidth, windowHeight = love.window.getMode()
     logoX = windowWidth / 2 - logoImage:getWidth() / 2
     logoY = windowHeight / 2 - logoImage:getHeight() / 2
     love.graphics.draw(logoImage, logoX, logoY)
