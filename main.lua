@@ -3,7 +3,8 @@ require 'enemy'
 
 local points
 local startTime
-local speed
+local snailSpeed
+local enemySpeed
 local myBackground
 local myBackgroundGrass
 local backgroundGrassArray
@@ -16,7 +17,8 @@ function love.load()
     -- Globals
     points = 0
     startTime = love.timer.getTime()
-    speed = 1000
+    snailSpeed = 1000
+    enemySpeed = 300
     local numGrass = 10
     local numMushroom = 10
 
@@ -67,18 +69,18 @@ end
 function love.update(dt)
     -- react to key presses
     if love.keyboard.isDown("down") then
-        mySnail:moveY(speed * dt)
+        mySnail:moveY(snailSpeed * dt)
     end
     if love.keyboard.isDown("up") then
-        mySnail:moveY(- speed * dt)
+        mySnail:moveY(- snailSpeed * dt)
     end
     if love.keyboard.isDown("left") then
-        mySnail:moveX(- speed * dt)
+        mySnail:moveX(- snailSpeed * dt)
     end
     if love.keyboard.isDown("right") then
-        mySnail:moveX(speed * dt)
+        mySnail:moveX(snailSpeed * dt)
     end
-    testEnemy:move(speed * dt, mySnail:getX(), mySnail:getY())
+    testEnemy:move(enemySpeed * dt, mySnail:getX(), mySnail:getY())
 end
 
 function love.draw()
