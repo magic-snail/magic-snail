@@ -91,6 +91,8 @@ function game.load()
     )
 
     elements = {}
+    elementImgs = {"/assets/images/fire_ball.png", "/assets/images/water_ball.png", "/assets/images/earth_ball.png", "/assets/images/air_ball.png"}
+    currentElement = 1
 end
 
 function game.update(dt)
@@ -128,16 +130,33 @@ function game.update(dt)
         ems = table.getn(elements)
         mx, my = love.mouse.getPosition()
         if ems == 0 then
-            em = Element.new(mySnail.x, mySnail.y, mx, my,"/assets/images/fire_ball.png")
+            em = Element.new(mySnail.x, mySnail.y, mx, my,elementImgs[currentElement])
             table.insert(elements, {elm = em, time = os.time()})
         else
             time = os.time() - 0.2
             if elements[ems].time < time then
-                em = Element.new(mySnail.x, mySnail.y, mx, my,"/assets/images/fire_ball.png")
+                em = Element.new(mySnail.x, mySnail.y, mx, my,elementImgs[currentElement])
                 table.insert(elements, {elm = em, time = os.time()})
             end
         end
     end
+
+    function love.wheelmoved(_, y)
+        if y > 0 then
+            if currentElement == 4 then
+                currentElement = 1
+            else
+                currentElement = currentElement + 1;
+            end
+        elseif y < 0 then
+            if currentElement == 1 then
+                currentElement = 4
+            else
+                currentElement = currentElement - 1;
+            end
+        end
+    end
+
     for i,em in ipairs(elements) do
         em.elm:fire(1000 * dt)
         time = os.time() - 1
@@ -241,6 +260,10 @@ function game.draw()
         love.graphics.getWidth()-150,
         0
     )
+
+    -- print current Element
+    eimg = love.graphics.newImage(elementImgs[currentElement])
+    love.graphics.draw(eimg, 0, 100)
 
     -- Draw Classes
     mySnail:draw()
