@@ -33,3 +33,14 @@ function love.draw()
         game.draw()
     end
 end
+
+function love.keypressed(key, _, isrepeat)
+    if not isrepeat and key == "escape" then
+        if gamestate == "start" then
+            love.event.quit()
+        elseif gamestate == "game" then
+            gamestate = "start"
+            start.load()
+        end
+    end
+end

@@ -95,9 +95,6 @@ end
 
 function game.update(dt)
     -- react to key presses
-    if love.keyboard.isDown("escape") then
-        return "start"
-    end
     if love.keyboard.isDown("down") then
         mySnail:moveY(snailSpeed * dt)
     end
