@@ -1,4 +1,5 @@
 require 'snail'
+require 'element'
 
 local points
 local startTime
@@ -58,6 +59,8 @@ function love.load()
         "/assets/images/snail_back.png",
         "/assets/images/snail_front.png"
     )
+
+    elements = {}
 end
 
 function love.update(dt)
@@ -73,6 +76,27 @@ function love.update(dt)
     end
     if love.keyboard.isDown("right") then
         mySnail:moveX(speed * dt)
+    end
+    if love.mouse.isDown(1) then
+        ems = table.getn(elements)
+        mx, my = love.mouse.getPosition()
+        if ems == 0 then
+            em = Element.new(mySnail.x, mySnail.y, mx, my,"/assets/images/fire_ball.png")
+            table.insert(elements, {elm = em, time = os.time()})
+        else
+            time = os.time() - 0.2
+            if elements[ems].time < time then
+                em = Element.new(mySnail.x, mySnail.y, mx, my,"/assets/images/fire_ball.png")
+                table.insert(elements, {elm = em, time = os.time()})
+            end
+        end
+    end
+    for i,em in ipairs(elements) do
+        em.elm:fire(1000 * dt)
+        time = os.time() - 1
+        if em.time < time then
+            table.remove(elements, i)
+        end
     end
 end
 
@@ -109,4 +133,8 @@ function love.draw()
 
     -- Draw Classes
     mySnail:draw()
+
+    for i,em in ipairs(elements) do
+        em.elm:draw()
+    end
 end
