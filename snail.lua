@@ -93,7 +93,7 @@ function Snail:setColor(currentElement)
     local elementColors = {
         {r = 30, g = 0, b = 0, a = 100},
         {r = 0, g = 102, b = 153, a = 100},
-        {r = 0, g = 0, b = 0, a = 0.5},
+        {r = 0, g = 0, b = 0, a = 0.8},
         {r = 255, g = 255, b = 0, a = 100}
     }
     self.color = {

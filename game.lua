@@ -341,10 +341,6 @@ function game.draw()
         0
     )
 
-    -- print current Element
-    eimg = love.graphics.newImage(elementImgs[currentElement])
-    love.graphics.draw(eimg, 0, 100)
-
     -- draw Animations
     if isFirering then
         local spriteNum = math.floor(animstars.currentTime / animstars.duration * #animstars.quads) + 1
