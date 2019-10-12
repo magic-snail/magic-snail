@@ -206,6 +206,15 @@ function game.update(dt)
         then
             return "dead"
         end
+
+        -- Check colliding with Element
+        local enemyData = {
+            image = enemy.image,
+            x = nextEnemyCoordinates.x,
+            y = nextEnemyCoordinates.y
+        }
+        isColliding = areColliding(enemyData, elements)
+        if isColliding then print("Enenmy dead") end
     end
 
     return "game"
