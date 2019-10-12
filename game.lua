@@ -9,7 +9,7 @@ local points
 local startTime
 local snailSpeed
 local enemySpeed
-local myBackground
+local backgroundArray
 local backgroundElementsArray
 local mySnail
 local chanceOfNewEnemy = 50
@@ -71,7 +71,25 @@ function game.load()
     animstars = newAnimation(love.graphics.newImage("/assets/images/stars_sprite.png"), 128, 128, 1)
 
     -- base background image
-    myBackground = love.graphics.newImage("/assets/images/green.png")
+    local myBackground = love.graphics.newImage("/assets/images/green.png")
+    local myBackgroundWidth = myBackground:getWidth()
+    local myBackgroundHeight = myBackground:getHeight()
+    local myMagicBackground = love.graphics.newImage("/assets/images/green_stars.png")
+    backgroundArray = {}
+    for i = 0, love.graphics.getWidth() / myBackgroundWidth do
+        for j = 0, love.graphics.getHeight() / myBackgroundHeight do
+            local currentImage = myBackground
+            if love.math.random(20) == 1 then
+                currentImage = myMagicBackground
+            end
+            table.insert(backgroundArray, {
+                image = currentImage,
+                x = i * myBackgroundWidth,
+                y = j * myBackgroundHeight
+            })
+        end
+    end
+
     -- add background elements
     local myBackgroundGrass = love.graphics.newImage("/assets/images/green_grass_free.png")
     local myBackgroundMush= love.graphics.newImage("/assets/images/green_mushroom_free.png")
@@ -312,10 +330,8 @@ end
 
 function game.draw()
     -- Draw background image
-    for i = 0, love.graphics.getWidth() / myBackground:getWidth() do
-        for j = 0, love.graphics.getHeight() / myBackground:getHeight() do
-            love.graphics.draw(myBackground, i * myBackground:getWidth(), j * myBackground:getHeight())
-        end
+    for _, data in pairs(backgroundArray) do
+        love.graphics.draw(data.image, data.x, data.y)
     end
 
     -- Draw background elements
