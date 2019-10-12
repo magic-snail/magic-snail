@@ -1,25 +1,24 @@
 Element = {}
 Element .__index = Element
 
-function Element.new(x, y, directionX, directionY, speed, image)
+function Element.new(x, y, directionX, directionY, image)
     local em = {}
     setmetatable(em, Element)
+
     em.x = x
     em.y = y
-    em.dx = directionX
-    em.dy = directionY
-    em.speed = speed
     em.image = love.graphics.newImage(image)
+
+    local dir = math.atan2(x-directionX,y-directionY)
+    em.ax = math.sin(dir)
+    em.ay = math.cos(dir)
 
     return em
 end
 
 function Element:fire(p)
-    dir = math.atan2(self.dx-self.x,self.dy-self.y)
-    ax = p * math.cos(dir)
-    by = p * math.sin(dir)
-    self.x = self.x + by
-    self.y = self.y + ax
+    self.x = self.x - em.ax * p
+    self.y = self.y - em.ay * p
 end
 
 function Element:draw()

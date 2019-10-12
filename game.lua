@@ -2,6 +2,7 @@ game = {}
 
 require 'snail'
 require 'enemy'
+require 'element'
 
 local joystick
 local points
@@ -87,6 +88,8 @@ function game.load()
         "/assets/images/snail_back.png",
         "/assets/images/snail_front.png"
     )
+
+    elements = {}
 end
 
 function game.update(dt)
@@ -117,6 +120,28 @@ function game.update(dt)
         end
         if y > 0 then
             mySnail:moveY(snailSpeed * dt)
+        end
+    end
+
+    if love.mouse.isDown(1) then
+        ems = table.getn(elements)
+        mx, my = love.mouse.getPosition()
+        if ems == 0 then
+            em = Element.new(mySnail.x, mySnail.y, mx, my,"/assets/images/fire_ball.png")
+            table.insert(elements, {elm = em, time = os.time()})
+        else
+            time = os.time() - 0.2
+            if elements[ems].time < time then
+                em = Element.new(mySnail.x, mySnail.y, mx, my,"/assets/images/fire_ball.png")
+                table.insert(elements, {elm = em, time = os.time()})
+            end
+        end
+    end
+    for i,em in ipairs(elements) do
+        em.elm:fire(1000 * dt)
+        time = os.time() - 1
+        if em.time < time then
+            table.remove(elements, i)
         end
     end
 
@@ -197,6 +222,10 @@ function game.draw()
     -- Draw obstacles
     for _, data in pairs(obstacles) do
         love.graphics.draw(data.image, data.x, data.y)
+    end
+
+    for _,em in ipairs(elements) do
+        em.elm:draw()
     end
 
     -- print FPS
