@@ -14,11 +14,15 @@ local backgroundElementsArray
 local mySnail
 local chanceOfNewEnemy = 100
 local enemyImages = {
-    "/assets/images/golem.png",
-    "/assets/images/blackbird.png"
+    '/assets/images/golem.png',
+    '/assets/images/blackbird.png'
 }
 local enemyArray = {}
 local obstacles
+local obstacleImages = {
+    '/assets/images/wood_free.png',
+    '/assets/images/stone_free.png'
+}
 
 function game.load()
     -- Globals
@@ -65,8 +69,8 @@ function game.load()
 
     -- add some obstacles
     obstacles = {}
-    local obstacleImage = love.graphics.newImage("/assets/images/wood_free.png")
     for _ = 1, numObstacles do
+        local obstacleImage = love.graphics.newImage(obstacleImages[love.math.random(#obstacleImages)])
         table.insert(obstacles, {
             image = obstacleImage,
             x = math.min(
