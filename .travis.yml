@@ -20,4 +20,3 @@ jobs:
               skip_cleanup: true
               on:
                   branch: master
-              overwrite: true
