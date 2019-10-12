@@ -50,4 +50,5 @@ cd ../appimage
 ./build.sh 11.2 > /dev/null
 )
 cp love-linux-builder/appimage/game-x86_64.AppImage dist/magic-snail-linux.AppImage
+rm -r love-linux-builder
 echo 'done.'
