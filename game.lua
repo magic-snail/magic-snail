@@ -12,15 +12,17 @@ local enemySpeed
 local myBackground
 local backgroundElementsArray
 local mySnail
-local chanceOfNewEnemy = 100
+local chanceOfNewEnemy = 50
 local enemyTypes = {
     {
         image = '/assets/images/golem.png',
-        stoppableByObstacle = true
+        stoppableByObstacle = true,
+        killedBy = "fire"
     },
     {
         image = '/assets/images/blackbird.png',
-        stoppableByObstacle = false
+        stoppableByObstacle = false,
+        killedBy = "air"
     }
 }
 local enemyArray = {}
@@ -145,12 +147,12 @@ function game.update(dt)
         ems = table.getn(elements)
         mx, my = love.mouse.getPosition()
         if ems == 0 then
-            em = Element.new(mySnail.x, mySnail.y, mx, my,elementImgs[currentElement])
+            em = Element.new(mySnail.x, mySnail.y, mx, my,elementImgs[currentElement], currentElement)
             table.insert(elements, {elm = em, time = os.time()})
         else
             time = os.time() - 0.2
             if elements[ems].time < time then
-                em = Element.new(mySnail.x, mySnail.y, mx, my,elementImgs[currentElement])
+                em = Element.new(mySnail.x, mySnail.y, mx, my,elementImgs[currentElement], currentElement)
                 table.insert(elements, {elm = em, time = os.time()})
             end
         end
@@ -202,7 +204,7 @@ function game.update(dt)
         end
 
         local enemyType = enemyTypes[math.random(#enemyTypes)]
-        table.insert(enemyArray, Enemy.new(x, y, enemyType.image, enemyType.stoppableByObstacle))
+        table.insert(enemyArray, Enemy.new(x, y, enemyType.image, enemyType.stoppableByObstacle, enemyType.killedBy))
     end
 
     for enemyNum, enemy in pairs(enemyArray) do
@@ -259,8 +261,10 @@ function game.update(dt)
         isColliding, colidedWith = areColliding(enemyData, myElements)
 
         if isColliding then
-            enemyArray[enemyNum] = nil
-            elements[colidedWith] = nil
+            if enemyArray[enemynum].killedBy == elements[colidedwith].elm.type then
+                enemyArray[enemynum] = nil
+            end
+            elements[colidedwith] = nil
         end
     end
 
