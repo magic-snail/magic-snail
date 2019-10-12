@@ -26,7 +26,6 @@ function endgame.draw()
     logoY = windowHeight / 2 - logoImage:getHeight() / 2
     love.graphics.draw(logoImage, logoX, logoY)
 
-    local textYPos = windowHeight / 2 + logoImage:getHeight() / 2 - 100
     love.graphics.print('You have been eaten! Your points: ' .. endpoints, logoX, logoY)
 
     love.graphics.print('WORLDWIDE HIGHSCORES: ', logoX, logoY + 50)
