@@ -94,16 +94,16 @@ end
 
 function game.update(dt)
     -- react to key presses
-    if love.keyboard.isDown("down") then
+    if love.keyboard.isDown("down") or love.keyboard.isDown("s") then
         mySnail:moveY(snailSpeed * dt)
     end
-    if love.keyboard.isDown("up") then
+    if love.keyboard.isDown("up") or love.keyboard.isDown("w") then
         mySnail:moveY(- snailSpeed * dt)
     end
-    if love.keyboard.isDown("left") then
+    if love.keyboard.isDown("left") or love.keyboard.isDown("a") then
         mySnail:moveX(- snailSpeed * dt)
     end
-    if love.keyboard.isDown("right") then
+    if love.keyboard.isDown("right") or love.keyboard.isDown("d") then
         mySnail:moveX(snailSpeed * dt)
     end
 
