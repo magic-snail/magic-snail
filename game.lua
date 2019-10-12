@@ -236,7 +236,7 @@ function game.update(dt)
 
     for enemyNum, enemy in pairs(enemyArray) do
         -- Check colliding with obstacle
-        local currentEnemySpeed = enemySpeed * dt
+        local currentEnemySpeed = (enemySpeed * dt) * enemy.speed
         local isColliding = true
         local nextEnemyCoordinates = enemy:getNextCoordinates(currentEnemySpeed, mySnail:getX(), mySnail:getY())
         if false == enemy.stoppableByObstacle then
