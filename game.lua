@@ -12,16 +12,28 @@ local enemySpeed
 local myBackground
 local backgroundElementsArray
 local mySnail
-local chanceOfNewEnemy = 100
+local chanceOfNewEnemy = 50
 local enemyTypes = {
     {
         image = '/assets/images/golem.png',
-        stoppableByObstacle = true
+        stoppableByObstacle = true,
+        notKillableBy = "earth"
     },
     {
         image = '/assets/images/blackbird.png',
-        stoppableByObstacle = false
-    }
+        stoppableByObstacle = false,
+        notKillableBy = "air"
+    },
+    {
+        image = '/assets/images/fire_hedgehog.png',
+        stoppableByObstacle = true,
+        notKillableBy = "fire"
+    },
+    {
+        image = '/assets/images/water_turtle.png',
+        stoppableByObstacle = true,
+        notKillableBy = "water"
+    },
 }
 local enemyArray = {}
 local obstacles
@@ -145,12 +157,12 @@ function game.update(dt)
         ems = table.getn(elements)
         mx, my = love.mouse.getPosition()
         if ems == 0 then
-            em = Element.new(mySnail.x, mySnail.y, mx, my,elementImgs[currentElement])
+            em = Element.new(mySnail.x, mySnail.y, mx, my,elementImgs[currentElement], currentElement)
             table.insert(elements, {elm = em, time = os.time()})
         else
             time = os.time() - 0.2
             if elements[ems].time < time then
-                em = Element.new(mySnail.x, mySnail.y, mx, my,elementImgs[currentElement])
+                em = Element.new(mySnail.x, mySnail.y, mx, my,elementImgs[currentElement], currentElement)
                 table.insert(elements, {elm = em, time = os.time()})
             end
         end
@@ -203,7 +215,7 @@ function game.update(dt)
         end
 
         local enemyType = enemyTypes[math.random(#enemyTypes)]
-        table.insert(enemyArray, Enemy.new(x, y, enemyType.image, enemyType.stoppableByObstacle))
+        table.insert(enemyArray, Enemy.new(x, y, enemyType.image, enemyType.stoppableByObstacle, enemyType.notKillableBy))
     end
 
     for enemyNum, enemy in pairs(enemyArray) do
@@ -260,8 +272,10 @@ function game.update(dt)
         isColliding, colidedWith = areColliding(enemyData, myElements)
 
         if isColliding then
-            enemyArray[enemyNum] = nil
-            elements[colidedWith] = nil
+            if enemyArray[enemyNum].notKillableBy ~= elements[colidedWith].elm.type then
+                table.remove(enemyArray, enemyNum)
+            end
+            table.remove(elements, colidedWith)
         end
     end
 
