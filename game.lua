@@ -20,21 +20,21 @@ local enemyTypes = {
         stoppableByObstacle = true,
         notKillableBy = "earth",
         points = 10,
-        speed = 0.5
+        speed = 0.6
     },
     {
         image = '/assets/images/blackbird.png',
         stoppableByObstacle = false,
         notKillableBy = "air",
         points = 30,
-        speed = 1.5
+        speed = 1
     },
     {
         image = '/assets/images/fire_hedgehog.png',
         stoppableByObstacle = true,
         notKillableBy = "fire",
         points = 10,
-        speed = 1
+        speed = 0.7
     },
     {
         image = '/assets/images/water_turtle.png',
