@@ -261,10 +261,10 @@ function game.update(dt)
         isColliding, colidedWith = areColliding(enemyData, myElements)
 
         if isColliding then
-            if enemyArray[enemynum].killedBy == elements[colidedwith].elm.type then
-                enemyArray[enemynum] = nil
+            if enemyArray[enemyNum].killedBy == elements[colidedWith].elm.type then
+                enemyArray[enemyNum] = nil
             end
-            elements[colidedwith] = nil
+            elements[colidedWith] = nil
         end
     end
 
