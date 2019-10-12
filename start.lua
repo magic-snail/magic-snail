@@ -12,14 +12,6 @@ function start.load()
     logoImage = love.graphics.newImage('/assets/images/magic_snail_start_background.png')
 end
 
-function start.update()
-    if love.keyboard.isDown("space") or love.mouse.isDown(1) then
-        return "game"
-    end
-
-    return "start"
-end
-
 function start.draw()
     local windowWidth, windowHeight = love.window.getMode()
     local logoX = windowWidth / 2 - logoImage:getWidth() / 2

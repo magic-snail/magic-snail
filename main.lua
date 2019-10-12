@@ -2,8 +2,8 @@ require "start"
 require "endgame"
 require "game"
 
-local gamestate
-local newstate
+local gameState
+local newState
 
 function love.load()
     -- Backgroundsound
@@ -12,49 +12,60 @@ function love.load()
     myBackgroundSound:play()
 
     love.graphics.setNewFont(25)
-    gamestate = "start"
+    gameState = 'start'
+    newState = 'start'
     start.load()
 end
 
 function love.update(dt)
-    if gamestate == "start" then
-        newstate = start.update()
-    elseif gamestate == "game" then
-        newstate, points = game.update(dt)
+    if gameState == "game" and gameState == newState then
+        newState, points = game.update(dt)
     end
 
-    if gamestate ~= newstate then
-        gamestate = newstate
-        if newstate == "start" then
+    if gameState ~= newState then
+        gameState = newState
+        if newState == "start" then
             start.load()
-        elseif newstate == "game" then
+        elseif newState == "game" then
             game.load()
-        elseif newstate == "dead" then
+        elseif newState == "dead" then
             endgame.load(points)
         end
     end
 end
 
 function love.draw()
-    if gamestate == "start" then
+    if gameState == "start" then
         start.draw()
-    elseif gamestate == "game" then
+    elseif gameState == "game" then
         game.draw()
-    elseif gamestate == "dead" then
+    elseif gameState == "dead" then
         endgame.draw()
     end
 end
 
-function love.keypressed(key, _, isrepeat)
-    if not isrepeat and key == "escape" then
-        if gamestate == "start" then
-            love.event.quit()
-        elseif gamestate == "game" then
-            gamestate = "start"
-            start.load()
-        elseif gamestate == "dead" then
-            gamestate = "start"
-            start.load()
+function love.keypressed(key, _, isRepeat)
+    if not isRepeat then
+        if key == "escape" then
+            if gameState == "start" then
+                love.event.quit()
+            elseif gameState == "game" then
+                newState = "start"
+            elseif gameState == "dead" then
+                newState = "start"
+            end
         end
+
+        if key == 'space' then
+            if gameState == 'start' or gameState == 'dead' then
+                newState = 'game'
+            end
+        end
+    end
+end
+
+function love.mousepressed(_, _, button)
+    if button == 1 and (gameState == 'start' or gameState == 'dead') then
+        newState = 'game'
     end
 end
