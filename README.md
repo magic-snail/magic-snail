@@ -14,6 +14,7 @@ It is licensed under GNU Affero General Public License version 3 or later.
 Playing the Game
 ================
 
+![](assets/build/screenshot.png)
 You can either use the instructions for your operating system below, or install [löve](https://love2d.org) and then download and open [magic-snail.love](https://github.com/magic-snail/magic-snail/releases/latest/download/magic-snail.love).
 
 Linux
