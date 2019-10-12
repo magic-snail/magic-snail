@@ -50,6 +50,7 @@ local obstacleImages = {
     '/assets/images/wood_free.png',
     '/assets/images/stone_free.png'
 }
+local magicStars
 
 function game.load()
     -- Globals
@@ -68,7 +69,7 @@ function game.load()
     local numMushroom = 10
     local numObstacles = 3
 
-    animstars = newAnimation(love.graphics.newImage("/assets/images/stars_sprite.png"), 128, 128, 1)
+    magicStars = newAnimation(love.graphics.newImage("/assets/images/stars_sprite.png"), 128, 128, 1)
 
     -- base background image
     local myBackground = love.graphics.newImage("/assets/images/green.png")
@@ -197,9 +198,9 @@ function game.update(dt)
 
 
     -- Stars Animation
-    animstars.currentTime = animstars.currentTime + dt
-    if animstars.currentTime >= animstars.duration then
-        animstars.currentTime = animstars.currentTime - animstars.duration
+    magicStars.currentTime = magicStars.currentTime + dt
+    if magicStars.currentTime >= magicStars.duration then
+        magicStars.currentTime = magicStars.currentTime - magicStars.duration
     end
 
     function love.wheelmoved(_, y)
@@ -373,8 +374,8 @@ function game.draw()
 
     -- draw Animations
     if isFirering then
-        local spriteNum = math.floor(animstars.currentTime / animstars.duration * #animstars.quads) + 1
-        love.graphics.draw(animstars.spriteSheet, animstars.quads[spriteNum], mySnail.x, mySnail.y - 110)
+        local spriteNum = math.floor(magicStars.currentTime / magicStars.duration * #magicStars.quads) + 1
+        love.graphics.draw(magicStars.spriteSheet, magicStars.quads[spriteNum], mySnail.x, mySnail.y - 110)
     end
 
     -- Draw Classes
