@@ -51,6 +51,12 @@ local obstacleImages = {
     '/assets/images/stone_free.png'
 }
 local magicStars
+local elementImages = {
+    "/assets/images/fire_ball.png",
+    "/assets/images/water_ball.png",
+    "/assets/images/earth_ball.png",
+    "/assets/images/air_ball.png"
+}
 
 function game.load()
     -- Globals
@@ -139,12 +145,6 @@ function game.load()
     )
 
     elements = {}
-    elementImgs = {
-        "/assets/images/fire_ball.png",
-        "/assets/images/water_ball.png",
-        "/assets/images/earth_ball.png",
-        "/assets/images/air_ball.png"
-    }
     currentElement = 1
 end
 
@@ -184,12 +184,12 @@ function game.update(dt)
         ems = table.getn(elements)
         mx, my = love.mouse.getPosition()
         if ems == 0 then
-            em = Element.new(mySnail.x, mySnail.y, mx, my,elementImgs[currentElement], currentElement)
+            em = Element.new(mySnail.x, mySnail.y, mx, my,elementImages[currentElement], currentElement)
             table.insert(elements, {elm = em, time = os.time()})
         else
             time = os.time() - 0.2
             if elements[ems].time < time then
-                em = Element.new(mySnail.x, mySnail.y, mx, my,elementImgs[currentElement], currentElement)
+                em = Element.new(mySnail.x, mySnail.y, mx, my,elementImages[currentElement], currentElement)
                 table.insert(elements, {elm = em, time = os.time()})
             end
         end
