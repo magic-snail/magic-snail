@@ -92,16 +92,16 @@ function love.update(dt)
     if joystick then
         local x, y = joystick.getAxes(joystick)
         if x < 0 then
-            mySnail:moveX(- speed * dt)
+            mySnail:moveX(- snailSpeed * dt)
         end
         if x > 0 then
-            mySnail:moveX(speed * dt)
+            mySnail:moveX(snailSpeed * dt)
         end
         if y < 0 then
-            mySnail:moveY(- speed * dt)
+            mySnail:moveY(- snailSpeed * dt)
         end
         if y > 0 then
-            mySnail:moveY(speed * dt)
+            mySnail:moveY(snailSpeed * dt)
         end
     end
 
