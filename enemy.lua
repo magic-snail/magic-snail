@@ -7,7 +7,7 @@ function Enemy.new(x, y, image)
     en.x = x
     en.y = y
     en.image = love.graphics.newImage(image)
-    en.width, en.Height = en.image:getDimensions()
+
     return en
 end
 
