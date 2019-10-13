@@ -211,7 +211,7 @@ function game.update(dt)
         mx, my = love.mouse.getPosition()
         if ems == 0 then
             em = Element.new(mySnail.x + 50, mySnail.y + 50, mx, my,elementImages[currentElement], currentElement)
-            table.insert(elements, {elm = em, time = os.time()})
+            table.insert(elements, {elm = em})
             love.audio.play(spellSound:clone())
         end
         isFirering = true
@@ -242,8 +242,8 @@ function game.update(dt)
 
     for i,em in ipairs(elements) do
         em.elm:update(1000 * dt)
-        time = os.time() - 1
-        if em.time < time then
+        if em.elm.x > love.graphics.getWidth() or em.elm.x < 0 or
+                em.elm.y > love.graphics.getHeight() or em.elm.y < 0 then
             table.remove(elements, i)
         end
     end
