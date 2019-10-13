@@ -213,13 +213,6 @@ function game.update(dt)
             em = Element.new(mySnail.x + 50, mySnail.y + 50, mx, my,elementImages[currentElement], currentElement)
             table.insert(elements, {elm = em, time = os.time()})
             love.audio.play(spellSound:clone())
-        else
-            time = os.time() - 0.2
-            if elements[ems].time < time then
-                em = Element.new(mySnail.x + 50, mySnail.y + 50, mx, my,elementImages[currentElement], currentElement)
-                table.insert(elements, {elm = em, time = os.time()})
-                love.audio.play(spellSound:clone())
-            end
         end
         isFirering = true
     end
