@@ -81,7 +81,7 @@ function love.wheelmoved(_, y)
 end
 
 function love.mousepressed(_, _, button)
-    if button == 1 and (gameState == 'start' or gameState == 'dead') then
+    if button == 1 and gameState == 'start' then
         newState = 'game'
     end
 end
