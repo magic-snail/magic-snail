@@ -1,4 +1,4 @@
-![](assets/images/snail_icon.png)
+![](assets/images/magic-snail.png)
 
 Magic Snail
 ===========
