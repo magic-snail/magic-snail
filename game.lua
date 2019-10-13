@@ -57,6 +57,7 @@ local elementImages = {
     "/assets/images/earth_ball.png",
     "/assets/images/air_ball.png"
 }
+local hitSound
 
 function game.load()
     -- Globals
@@ -146,6 +147,9 @@ function game.load()
 
     elements = {}
     currentElement = 1
+
+    -- sound effects
+    hitSound = love.audio.newSource('/assets/music/hit.ogg', 'static')
 end
 
 function game.update(dt)
@@ -331,6 +335,7 @@ function game.update(dt)
         isColliding, colidedWith = areColliding(enemyData, myElements)
 
         if isColliding then
+            love.audio.play(hitSound)
             if enemyArray[enemyNum].notKillableBy ~= elements[colidedWith].elm.type then
                 points = points + enemy.points
                 table.remove(enemyArray, enemyNum)
