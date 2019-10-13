@@ -331,7 +331,7 @@ function game.update(dt)
     return "game"
 end
 
-function game.advandeCurrentElement()
+function game.advandeToNextElement()
     if currentElement == 4 then
         currentElement = 1
     else
@@ -341,19 +341,11 @@ function game.advandeCurrentElement()
     mySnail:setColor(currentElement)
 end
 
-function love.wheelmoved(_, y)
-     if y < 0 then
-        if currentElement == 4 then
-            currentElement = 1
-        else
-            currentElement = currentElement + 1;
-        end
+function game.advandeToPreviousElement()
+    if currentElement == 1 then
+        currentElement = 4
     else
-        if currentElement == 1 then
-            currentElement = 4
-        else
-            currentElement = currentElement - 1;
-        end
+        currentElement = currentElement - 1;
     end
 
     mySnail:setColor(currentElement)

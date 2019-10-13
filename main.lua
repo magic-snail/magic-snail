@@ -58,7 +58,7 @@ function love.keypressed(key, _, isRepeat)
 
         if key == 'space' then
             if gameState == 'game' then
-                game.advandeCurrentElement()
+                game.advandeToNextElement()
             end
         end
 
@@ -66,6 +66,16 @@ function love.keypressed(key, _, isRepeat)
             if gameState == 'start' or gameState == 'dead' then
                 newState = 'game'
             end
+        end
+    end
+end
+
+function love.wheelmoved(_, y)
+    if gameState == 'game' then
+        if y < 0 then
+            game.advandeToNextElement()
+        else
+            game.advandeToPreviousElement()
         end
     end
 end
