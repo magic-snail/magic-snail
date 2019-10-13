@@ -14,9 +14,9 @@ function endgame.load(points)
     endpoints = points
 
     if points ~= 0 then
-        place = http.request("http://tclinux.de/snailscore.php?password=Geix7ei3oZey3reiJi6c&mode=set&score=" .. points)
+        place = http.request("http://tclinux.de/snailscore.php?mode=set&score=" .. points)
     end
-    highscores = http.request("http://tclinux.de/snailscore.php?password=Geix7ei3oZey3reiJi6c&mode=get")
+    highscores = http.request("http://tclinux.de/snailscore.php?mode=get")
 end
 
 function endgame.update()
