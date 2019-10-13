@@ -62,6 +62,7 @@ local hitGoodSound
 local hitBadSound
 local spellSound
 local golemSound
+local blackbirdSound
 
 function game.load()
     -- Globals
@@ -159,6 +160,7 @@ function game.load()
     hitBadSound = love.audio.newSource('/assets/music/hit.ogg', 'static')
     spellSound = love.audio.newSource('/assets/music/77691__joelaudio__sfx-magic-fireball-001.wav', 'static')
     golemSound = love.audio.newSource('/assets/music/103575__ryansnook__growl3.wav', 'static')
+    blackbirdSound = love.audio.newSource('/assets/music/33548__reinsamba__miaowing-blackbird2.wav', 'static')
 end
 
 function game.update(dt)
@@ -275,6 +277,8 @@ function game.update(dt)
         ))
         if enemyType.notKillableBy == 'earth' then
             love.audio.play(golemSound:clone())
+        elseif enemyType.notKillableBy == 'air' then
+            love.audio.play(blackbirdSound:clone())
         end
     end
 
