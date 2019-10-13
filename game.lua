@@ -152,7 +152,9 @@ function game.load()
     currentElement = 1
 
     -- sound effects
-    hitGoodSound = love.audio.newSource('/assets/music/hit.ogg', 'static')
+    hitGoodSound = love.audio.newSource(
+        '/assets/music/188564__deleted-user-3330286__enemydeath-thm-adventure.mp3', 'static'
+    )
     hitBadSound = love.audio.newSource('/assets/music/hit.ogg', 'static')
     spellSound = love.audio.newSource('/assets/music/77691__joelaudio__sfx-magic-fireball-001.wav', 'static')
 end

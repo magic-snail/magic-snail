@@ -12,6 +12,7 @@ Soundeffects
 
 This game uses these sounds from freesound:
 SFX_MAGIC_FIREBALL_001.wav by [JoelAudio](https://freesound.org/people/JoelAudio/)
+enemyDeath\[THM_Adventure\] by [deleted_user_3330286](https://freesound.org/people/deleted_user_3330286/)
 
 Game Engine
 ===========
