@@ -2,6 +2,9 @@ start = {}
 
 local startFont
 local coloredText
+local descText1
+local descText2
+local descText3
 local logoImage
 
 function start.load()
