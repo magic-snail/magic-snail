@@ -57,6 +57,7 @@ local elementImages = {
     "/assets/images/earth_ball.png",
     "/assets/images/air_ball.png"
 }
+local currentElement
 local hitSound
 
 function game.load()
@@ -206,23 +207,6 @@ function game.update(dt)
         magicStars.currentTime = magicStars.currentTime - magicStars.duration
     end
 
-    function love.wheelmoved(_, y)
-        if y > 0 then
-            if currentElement == 4 then
-                currentElement = 1
-            else
-                currentElement = currentElement + 1;
-            end
-        elseif y < 0 then
-            if currentElement == 1 then
-                currentElement = 4
-            else
-                currentElement = currentElement - 1;
-            end
-        end
-        mySnail:setColor(currentElement)
-    end
-
     if love.keyboard.isDown("1") then
         currentElement = 1
         mySnail:setColor(currentElement)
@@ -345,6 +329,34 @@ function game.update(dt)
     end
 
     return "game"
+end
+
+function game.advandeCurrentElement()
+    if currentElement == 4 then
+        currentElement = 1
+    else
+        currentElement = currentElement + 1;
+    end
+
+    mySnail:setColor(currentElement)
+end
+
+function love.wheelmoved(_, y)
+     if y < 0 then
+        if currentElement == 4 then
+            currentElement = 1
+        else
+            currentElement = currentElement + 1;
+        end
+    else
+        if currentElement == 1 then
+            currentElement = 4
+        else
+            currentElement = currentElement - 1;
+        end
+    end
+
+    mySnail:setColor(currentElement)
 end
 
 function game.draw()

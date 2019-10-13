@@ -57,6 +57,12 @@ function love.keypressed(key, _, isRepeat)
         end
 
         if key == 'space' then
+            if gameState == 'game' then
+                game.advandeCurrentElement()
+            end
+        end
+
+        if key == 'return' then
             if gameState == 'start' or gameState == 'dead' then
                 newState = 'game'
             end

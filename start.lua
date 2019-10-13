@@ -10,7 +10,7 @@ local logoImage
 function start.load()
     startFont = love.graphics.setNewFont(25)
     local textColor = {0, 0, 0}
-    coloredText = {textColor, "Press SPACE to start!"}
+    coloredText = {textColor, "Press ENTER to start!"}
     descText1 = {textColor, "Just click with the mouse to summon a magic element."}
     descText2 = {textColor, "Change the element with the mousewheel."}
     descText3 = {textColor, "Not all elements can defeat all enemies."}
