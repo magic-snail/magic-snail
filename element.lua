@@ -29,5 +29,5 @@ function Element:update(dt)
 end
 
 function Element:draw()
-    love.graphics.draw(self.image, self.x, self.y, 2, 2)
+    love.graphics.draw(self.image, self.x, self.y, 0, 2)
 end
