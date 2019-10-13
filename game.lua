@@ -195,15 +195,13 @@ function game.update(dt)
         if ems == 0 then
             em = Element.new(mySnail.x + 50, mySnail.y + 50, mx, my,elementImages[currentElement], currentElement)
             table.insert(elements, {elm = em, time = os.time()})
-            love.audio.stop(spellSound)
-            love.audio.play(spellSound)
+            love.audio.play(spellSound:clone())
         else
             time = os.time() - 0.2
             if elements[ems].time < time then
                 em = Element.new(mySnail.x + 50, mySnail.y + 50, mx, my,elementImages[currentElement], currentElement)
                 table.insert(elements, {elm = em, time = os.time()})
-                love.audio.stop(spellSound)
-                love.audio.play(spellSound)
+                love.audio.play(spellSound:clone())
             end
         end
         isFirering = true
@@ -330,9 +328,9 @@ function game.update(dt)
             if enemyArray[enemyNum].notKillableBy ~= elements[colidedWith].elm.type then
                 points = points + enemy.points
                 table.remove(enemyArray, enemyNum)
-                love.audio.play(hitGoodSound)
+                love.audio.play(hitGoodSound:clone())
             else
-                love.audio.play(hitBadSound)
+                love.audio.play(hitBadSound:clone())
             end
             table.remove(elements, colidedWith)
         end
