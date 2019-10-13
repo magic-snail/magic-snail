@@ -167,7 +167,7 @@ function game.load()
         elseif enemyType.notKillableBy == 'water' then
             enemyTypes[i].sound = love.audio.newSource('/assets/music/hedgehog.ogg', 'static')
         elseif enemyType.notKillableBy == 'fire' then
-            enemyTypes[i].sound = love.audio.newSource('/assets/music/hedgehog.ogg', 'static')
+            enemyTypes[i].sound = love.audio.newSource('/assets/music/106131__j1987__leafrustle.wav', 'static')
         end
     end
 end

@@ -15,6 +15,7 @@ This game uses these sounds from freesound:
 - enemyDeath\[THM_Adventure\] by [deleted_user_3330286](https://freesound.org/people/deleted_user_3330286/)
 - growl3.wav by [ryansnook](https://freesound.org/people/ryansnook/)
 - miaowing_blackbird2.wav by [reinsamba](https://freesound.org/people/reinsamba/)
+- leafrustle.wav by [j1987](https://freesound.org/people/j1987/)
 
 Game Engine
 ===========
