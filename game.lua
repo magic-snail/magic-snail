@@ -58,7 +58,9 @@ local elementImages = {
     "/assets/images/air_ball.png"
 }
 local currentElement
-local hitSound
+local hitGoodSound
+local hitBadSound
+local spellSound
 
 function game.load()
     -- Globals
@@ -150,7 +152,9 @@ function game.load()
     currentElement = 1
 
     -- sound effects
-    hitSound = love.audio.newSource('/assets/music/hit.ogg', 'static')
+    hitGoodSound = love.audio.newSource('/assets/music/hit.ogg', 'static')
+    hitBadSound = love.audio.newSource('/assets/music/hit.ogg', 'static')
+    spellSound = love.audio.newSource('/assets/music/77691__joelaudio__sfx-magic-fireball-001.wav', 'static')
 end
 
 function game.update(dt)
@@ -191,11 +195,15 @@ function game.update(dt)
         if ems == 0 then
             em = Element.new(mySnail.x + 50, mySnail.y + 50, mx, my,elementImages[currentElement], currentElement)
             table.insert(elements, {elm = em, time = os.time()})
+            love.audio.stop(spellSound)
+            love.audio.play(spellSound)
         else
             time = os.time() - 0.2
             if elements[ems].time < time then
                 em = Element.new(mySnail.x + 50, mySnail.y + 50, mx, my,elementImages[currentElement], currentElement)
                 table.insert(elements, {elm = em, time = os.time()})
+                love.audio.stop(spellSound)
+                love.audio.play(spellSound)
             end
         end
         isFirering = true
@@ -319,10 +327,12 @@ function game.update(dt)
         isColliding, colidedWith = areColliding(enemyData, myElements)
 
         if isColliding then
-            love.audio.play(hitSound)
             if enemyArray[enemyNum].notKillableBy ~= elements[colidedWith].elm.type then
                 points = points + enemy.points
                 table.remove(enemyArray, enemyNum)
+                love.audio.play(hitGoodSound)
+            else
+                love.audio.play(hitBadSound)
             end
             table.remove(elements, colidedWith)
         end
