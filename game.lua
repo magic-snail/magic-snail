@@ -61,6 +61,7 @@ local currentElement
 local hitGoodSound
 local hitBadSound
 local spellSound
+local golemSound
 
 function game.load()
     -- Globals
@@ -157,6 +158,7 @@ function game.load()
     )
     hitBadSound = love.audio.newSource('/assets/music/hit.ogg', 'static')
     spellSound = love.audio.newSource('/assets/music/77691__joelaudio__sfx-magic-fireball-001.wav', 'static')
+    golemSound = love.audio.newSource('/assets/music/103575__ryansnook__growl3.wav', 'static')
 end
 
 function game.update(dt)
@@ -271,6 +273,9 @@ function game.update(dt)
             enemyType.points,
             enemyType.speed
         ))
+        if enemyType.notKillableBy == 'earth' then
+            love.audio.play(golemSound:clone())
+        end
     end
 
     for enemyNum, enemy in pairs(enemyArray) do
