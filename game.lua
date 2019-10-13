@@ -363,11 +363,11 @@ function game.draw()
     end
 
     -- print Infos
-    love.graphics.setNewFont(25)
+    love.graphics.setNewFont(30)
     love.graphics.print("Points: " .. string.format("%05d", points), 0, 0)
     love.graphics.print(
         "Time: " .. string.format("%04d", math.floor(love.timer.getTime() - startTime)),
-        love.graphics.getWidth()-150,
+        love.graphics.getWidth()-200,
         0
     )
 
