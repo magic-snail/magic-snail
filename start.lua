@@ -18,7 +18,12 @@ function start.load()
     descText2 = {textColor, "Change the element with the mousewheel."}
     descText3 = {textColor, "Not all elements can defeat all enemies."}
 
-    love.graphics.setBackgroundColor(1, 1, 1)
+    local backgroundColor = {
+        0.651,
+        0.518,
+        0.612
+    }
+    love.graphics.setBackgroundColor(backgroundColor)
     logoImage = love.graphics.newImage('/assets/images/backgrounds/startscene.png')
 end
 

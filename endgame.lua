@@ -8,9 +8,13 @@ local endpoints
 
 function endgame.load(points)
     love.graphics.setNewFont(25)
-    love.graphics.setBackgroundColor(0, 0, 0)
+    local backgroundColor = {
+        0.651,
+        0.518,
+        0.612
+    }
+    love.graphics.setBackgroundColor(backgroundColor)
     logoImage = love.graphics.newImage('/assets/images/backgrounds/endscene.png')
-    love.graphics.setBackgroundColor(255, 255, 255)
     endpoints = points
 
     if points ~= 0 then
