@@ -189,12 +189,12 @@ function game.update(dt)
         ems = table.getn(elements)
         mx, my = love.mouse.getPosition()
         if ems == 0 then
-            em = Element.new(mySnail.x, mySnail.y, mx, my,elementImages[currentElement], currentElement)
+            em = Element.new(mySnail.x + 50, mySnail.y + 50, mx, my,elementImages[currentElement], currentElement)
             table.insert(elements, {elm = em, time = os.time()})
         else
             time = os.time() - 0.2
             if elements[ems].time < time then
-                em = Element.new(mySnail.x, mySnail.y, mx, my,elementImages[currentElement], currentElement)
+                em = Element.new(mySnail.x + 50, mySnail.y + 50, mx, my,elementImages[currentElement], currentElement)
                 table.insert(elements, {elm = em, time = os.time()})
             end
         end
