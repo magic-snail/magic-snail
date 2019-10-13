@@ -61,8 +61,6 @@ local currentElement
 local hitGoodSound
 local hitBadSound
 local spellSound
-local golemSound
-local blackbirdSound
 
 function game.load()
     -- Globals
@@ -159,8 +157,19 @@ function game.load()
     )
     hitBadSound = love.audio.newSource('/assets/music/hit.ogg', 'static')
     spellSound = love.audio.newSource('/assets/music/77691__joelaudio__sfx-magic-fireball-001.wav', 'static')
-    golemSound = love.audio.newSource('/assets/music/103575__ryansnook__growl3.wav', 'static')
-    blackbirdSound = love.audio.newSource('/assets/music/33548__reinsamba__miaowing-blackbird2.wav', 'static')
+    for i, enemyType in ipairs(enemyTypes) do
+        if enemyType.notKillableBy == 'earth' then
+            enemyTypes[i].sound = love.audio.newSource('/assets/music/103575__ryansnook__growl3.wav', 'static')
+        elseif enemyType.notKillableBy == 'air' then
+            enemyTypes[i].sound = love.audio.newSource(
+                '/assets/music/33548__reinsamba__miaowing-blackbird2.wav', 'static'
+            )
+        elseif enemyType.notKillableBy == 'water' then
+            enemyTypes[i].sound = love.audio.newSource('/assets/music/hedgehog.ogg', 'static')
+        elseif enemyType.notKillableBy == 'fire' then
+            enemyTypes[i].sound = love.audio.newSource('/assets/music/hedgehog.ogg', 'static')
+        end
+    end
 end
 
 function game.update(dt)
@@ -275,11 +284,7 @@ function game.update(dt)
             enemyType.points,
             enemyType.speed
         ))
-        if enemyType.notKillableBy == 'earth' then
-            love.audio.play(golemSound:clone())
-        elseif enemyType.notKillableBy == 'air' then
-            love.audio.play(blackbirdSound:clone())
-        end
+        love.audio.play(enemyType.sound:clone())
     end
 
     for enemyNum, enemy in pairs(enemyArray) do
