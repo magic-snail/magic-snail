@@ -12,7 +12,9 @@ function endgame.load(points)
     love.graphics.setBackgroundColor(255, 255, 255)
     endpoints = points
 
-    place = http.request("http://tclinux.de/snailscore.php?password=Geix7ei3oZey3reiJi6c&mode=set&score=" .. points)
+    if points ~= 0 then
+        place = http.request("http://tclinux.de/snailscore.php?password=Geix7ei3oZey3reiJi6c&mode=set&score=" .. points)
+    end
     highscores = http.request("http://tclinux.de/snailscore.php?password=Geix7ei3oZey3reiJi6c&mode=get")
 end
 
@@ -37,7 +39,9 @@ function endgame.draw()
         love.graphics.print(v, logoX + 50, logoY + 105 + (35*i))
         i = i + 2
     end
-    love.graphics.print('You are on place: ' .. place, logoX, logoY + 90 + (35*i))
+    if points ~= 0 then
+        love.graphics.print('You are on place: ' .. place, logoX, logoY + 90 + (35*i))
+    end
 end
 
 return endgame
