@@ -9,7 +9,7 @@ local endpoints
 function endgame.load(points)
     love.graphics.setNewFont(25)
     love.graphics.setBackgroundColor(0, 0, 0)
-    logoImage = love.graphics.newImage('/assets/images/magic_snail_endscene.png')
+    logoImage = love.graphics.newImage('/assets/images/backgrounds/endscene.png')
     love.graphics.setBackgroundColor(255, 255, 255)
     endpoints = points
 

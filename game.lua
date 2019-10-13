@@ -16,28 +16,28 @@ local chanceOfNewEnemy = 50
 local isFirering = false
 local enemyTypes = {
     {
-        image = '/assets/images/golem.png',
+        image = '/assets/images/enemies/golem.png',
         stoppableByObstacle = true,
         notKillableBy = "earth",
         points = 10,
         speed = 0.6
     },
     {
-        image = '/assets/images/blackbird.png',
+        image = '/assets/images/enemies/blackbird.png',
         stoppableByObstacle = false,
         notKillableBy = "air",
         points = 30,
         speed = 1
     },
     {
-        image = '/assets/images/fire_hedgehog.png',
+        image = '/assets/images/enemies/hedgehog.png',
         stoppableByObstacle = true,
         notKillableBy = "fire",
         points = 10,
         speed = 0.7
     },
     {
-        image = '/assets/images/water_turtle.png',
+        image = '/assets/images/enemies/turtle.png',
         stoppableByObstacle = true,
         notKillableBy = "water",
         points = 10,
@@ -47,15 +47,15 @@ local enemyTypes = {
 local enemyArray = {}
 local obstacles
 local obstacleImages = {
-    '/assets/images/wood_free.png',
-    '/assets/images/stone_free.png'
+    '/assets/images/obstacles/wood.png',
+    '/assets/images/obstacles/stone.png'
 }
 local magicStars
 local elementImages = {
-    "/assets/images/fire_ball.png",
-    "/assets/images/water_ball.png",
-    "/assets/images/earth_ball.png",
-    "/assets/images/air_ball.png"
+    "/assets/images/elements/fire.png",
+    "/assets/images/elements/water.png",
+    "/assets/images/elements/earth.png",
+    "/assets/images/elements/air.png"
 }
 local currentElement
 local hitGoodSound
@@ -79,13 +79,13 @@ function game.load()
     local numMushroom = 10
     local numObstacles = 3
 
-    magicStars = newAnimation(love.graphics.newImage("/assets/images/stars_sprite.png"), 128, 128, 1)
+    magicStars = newAnimation(love.graphics.newImage("/assets/images/snail/stars_sprite.png"), 128, 128, 1)
 
     -- base background image
-    local myBackground = love.graphics.newImage("/assets/images/green.png")
+    local myBackground = love.graphics.newImage("/assets/images/backgrounds/green.png")
     local myBackgroundWidth = myBackground:getWidth()
     local myBackgroundHeight = myBackground:getHeight()
-    local myMagicBackground = love.graphics.newImage("/assets/images/green_stars.png")
+    local myMagicBackground = love.graphics.newImage("/assets/images/backgrounds/green_stars.png")
     backgroundArray = {}
     for i = 0, love.graphics.getWidth() / myBackgroundWidth do
         for j = 0, love.graphics.getHeight() / myBackgroundHeight do
@@ -102,8 +102,8 @@ function game.load()
     end
 
     -- add background elements
-    local myBackgroundGrass = love.graphics.newImage("/assets/images/green_grass_free.png")
-    local myBackgroundMush= love.graphics.newImage("/assets/images/green_mushroom_free.png")
+    local myBackgroundGrass = love.graphics.newImage("/assets/images/backgrounds/grass.png")
+    local myBackgroundMush= love.graphics.newImage("/assets/images/backgrounds/mushroom.png")
     backgroundElementsArray = {}
     for _ = 1, numGrass do
         table.insert(backgroundElementsArray, {

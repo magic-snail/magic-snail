@@ -8,10 +8,10 @@ function Snail.new(x, y)
     sn.x = x
     sn.y = y
 
-    sn.imageLeft = love.graphics.newImage("/assets/images/snail_left.png")
-    sn.imageRight = love.graphics.newImage("/assets/images/snail_right.png")
-    sn.imageUp = love.graphics.newImage("/assets/images/snail_back.png")
-    sn.imageDown = love.graphics.newImage("/assets/images/snail_front.png")
+    sn.imageLeft = love.graphics.newImage("/assets/images/snail/left.png")
+    sn.imageRight = love.graphics.newImage("/assets/images/snail/right.png")
+    sn.imageUp = love.graphics.newImage("/assets/images/snail/up.png")
+    sn.imageDown = love.graphics.newImage("/assets/images/snail/down.png")
     sn:setColor(1)
 
     -- 0 = right, 1 = down, 2 = left, 3 = up
