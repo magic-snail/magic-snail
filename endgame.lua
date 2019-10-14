@@ -5,6 +5,8 @@ endgame = {}
 
 local logoImage
 local endpoints
+local points
+local highscores
 
 function endgame.load(points)
     love.graphics.setNewFont(25)
