@@ -1,8 +1,8 @@
 game = {}
 
-require 'snail'
-require 'enemy'
-require 'element'
+require 'src.snail'
+require 'src.enemy'
+require 'src.element'
 
 local joystick
 local points

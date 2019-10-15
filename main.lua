@@ -1,6 +1,6 @@
-require "start"
-require "endgame"
-require "game"
+require "src.start"
+require "src.endgame"
+require "src.game"
 
 local gameState
 local newState
