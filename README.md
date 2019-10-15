@@ -3,8 +3,9 @@
 Magic Snail
 ===========
 
-[![CI pipeline](https://travis-ci.org/magic-snail/magic-snail.svg?branch=master)](https://travis-ci.org/magic-snail/magic-snail)
 ![](http://tclinux.de/snailscore.php?mode=redirecttobadge)
+[![CI pipeline](https://travis-ci.org/magic-snail/magic-snail.svg?branch=master)](https://travis-ci.org/magic-snail/magic-snail)
+[![latest release](https://img.shields.io/github/v/release/magic-snail/magic-snail.svg)](https://github.com/magic-snail/magic-snail/releases/latest)
 
 Magic Snail is a game written in lua with [löve](https://love2d.org).
 A documentation about löve can be found in their [wiki](https://love2d.org/wiki/Main_Page).
